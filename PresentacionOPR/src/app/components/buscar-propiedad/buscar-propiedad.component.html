@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="row justify-content-center borde">
+    <div class="col-8 ">
+      <h4 class="text-left">Buscar Propiedad</h4>
+      <p class="text-left">
+        De click sobre un item de la lista para ver mas detalles
+        datos
+      </p>
+      <form class="form-inline my-2 my-lg-0">
+        <input
+          class="form-control mr-sm-2"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+          Search
+        </button>
+      </form>
+      <div class="text-center ">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Producto</th>
+              <th scope="col">Cantidad</th>
+              <th scope="col">Precio Und</th>
+              <th scope="col">Precio total</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of productos; let i = index">
+              <th
+                [routerLink]="['/bodeguero/detalleProd', item.id]"
+                scope="row"
+              >
+                {{ item.id }}
+              </th>
+              <td [routerLink]="['/bodeguero/detalleProd', item.id]">
+                {{ item.nombre }}
+              </td>
+              <td [routerLink]="['/bodeguero/detalleProd', item.id]">
+                {{ item.cantidad }}
+              </td>
+              <td [routerLink]="['/bodeguero/detalleProd', item.id]">
+                {{ item.precio }}
+              </td>
+              <td [routerLink]="['/bodeguero/detalleProd', item.id]">
+                {{ item.precio }}
+              </td>
+              <td class="">
+                <i (click)="eliminarItem(item.id)" class="fas fa-trash-alt"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
