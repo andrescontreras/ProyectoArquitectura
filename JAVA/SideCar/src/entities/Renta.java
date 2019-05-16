@@ -6,8 +6,10 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -15,10 +17,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -33,7 +37,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Renta.findByIdUsuario", query = "SELECT r FROM Renta r WHERE r.idUsuario = :idUsuario")
     , @NamedQuery(name = "Renta.findByEmail", query = "SELECT r FROM Renta r WHERE r.email = :email")
     , @NamedQuery(name = "Renta.findByPrecioRenta", query = "SELECT r FROM Renta r WHERE r.precioRenta = :precioRenta")
-    , @NamedQuery(name = "Renta.findByFecha", query = "SELECT r FROM Renta r WHERE r.fecha = :fecha")})
+    , @NamedQuery(name = "Renta.findByFecha", query = "SELECT r FROM Renta r WHERE r.fecha = :fecha")
+    , @NamedQuery(name = "Renta.findByEstado", query = "SELECT r FROM Renta r WHERE r.estado = :estado")})
 public class Renta implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -54,6 +59,11 @@ public class Renta implements Serializable {
     @Column(name = "FECHA")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
+    @Basic(optional = false)
+    @Column(name = "ESTADO")
+    private Character estado;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idRenta")
+    private Collection<Pago> pagoCollection;
     @JoinColumn(name = "ID_PROPIEDAD", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Propiedad idPropiedad;
@@ -65,12 +75,13 @@ public class Renta implements Serializable {
         this.id = id;
     }
 
-    public Renta(Short id, short idUsuario, String email, int precioRenta, Date fecha) {
+    public Renta(Short id, short idUsuario, String email, int precioRenta, Date fecha, Character estado) {
         this.id = id;
         this.idUsuario = idUsuario;
         this.email = email;
         this.precioRenta = precioRenta;
         this.fecha = fecha;
+        this.estado = estado;
     }
 
     public Short getId() {
@@ -111,6 +122,23 @@ public class Renta implements Serializable {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    public Character getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Character estado) {
+        this.estado = estado;
+    }
+
+    @XmlTransient
+    public Collection<Pago> getPagoCollection() {
+        return pagoCollection;
+    }
+
+    public void setPagoCollection(Collection<Pago> pagoCollection) {
+        this.pagoCollection = pagoCollection;
     }
 
     public Propiedad getIdPropiedad() {

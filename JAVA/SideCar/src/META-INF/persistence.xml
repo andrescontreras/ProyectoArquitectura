@@ -4,6 +4,7 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>entities.Propiedad</class>
     <class>entities.Renta</class>
+    <class>entities.Pago</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@orion.javeriana.edu.co:1521:PUJDB"/>
       <property name="javax.persistence.jdbc.user" value="is136307"/>
