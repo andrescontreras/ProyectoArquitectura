@@ -17,9 +17,21 @@ namespace REST_Financiera.Controllers
         private FinancieraEntities db = new FinancieraEntities();
 
         // GET: api/Usuarios
-        public IQueryable<Usuario> GetUsuario()
+        public List<Usuario> GetUsuario()
         {
-            return db.Usuario;
+			List<Usuario> usuarios = new List<Usuario>();
+			foreach (var item in db.Usuario)
+			{
+				Usuario u = new Usuario();
+				u.id_usuario = item.id_usuario;
+				u.nombre = item.nombre;
+				u.numero_documento = item.numero_documento;
+				u.password = item.password;
+				u.saldo = item.saldo;
+				u.tipo_documento = item.tipo_documento;
+				usuarios.Add(u);
+			}
+            return usuarios;
         }
 
         // GET: api/Usuarios/5
