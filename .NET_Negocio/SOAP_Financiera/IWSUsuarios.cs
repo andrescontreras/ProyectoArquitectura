@@ -14,5 +14,17 @@ namespace SOAP_Financiera
 	{
 		[OperationContract]
 		List<Usuario> DoWork();
+		[OperationContract]
+		List<Usuario> GetAllUsuario();
+		[OperationContract]
+		int AddUsuario(Usuario usuario);
+		[OperationContract]
+		Usuario GetAllUsuarioById(int id);
+
+		[OperationContract]
+		int UpdateUsuario(Usuario usuario);
+
+		[OperationContract]
+		int DeleteUsuarioById(int Id);
 	}
 }
