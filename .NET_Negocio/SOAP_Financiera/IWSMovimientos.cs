@@ -14,5 +14,17 @@ namespace SOAP_Financiera
 	{
 		[OperationContract]
 		List<Movimiento> DoWork();
+		[OperationContract]
+		List<Movimiento> GetAllMovimiento();
+		[OperationContract]
+		int AddMovimiento(Movimiento movimiento);
+		[OperationContract]
+		Movimiento GetAllMovimientoById(int id);
+
+		[OperationContract]
+		int UpdateMovimiento(Movimiento movimiento);
+
+		[OperationContract]
+		int DeleteMovimientoById(int Id);
 	}
 }
