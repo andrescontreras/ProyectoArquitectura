@@ -22,32 +22,36 @@
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Producto</th>
-              <th scope="col">Cantidad</th>
-              <th scope="col">Precio Und</th>
-              <th scope="col">Precio total</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Tipo</th>
+              <th scope="col">Direccion</th>
+              <th scope="col">Precio</th>
+              <th scope="col">Propietario</th>
               <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of productos; let i = index">
+            <tr *ngFor="let item of propiedades; let i = index">
               <th
-                [routerLink]="['/bodeguero/detalleProd', item.id]"
+                [routerLink]="['/detalle', item.ID]"
                 scope="row"
               >
-                {{ item.id }}
+                {{ item.ID }}
               </th>
-              <td [routerLink]="['/bodeguero/detalleProd', item.id]">
-                {{ item.nombre }}
+              <td [routerLink]="['/detalle', item.ID]">
+                {{ item.NOMBRE }}
               </td>
-              <td [routerLink]="['/bodeguero/detalleProd', item.id]">
-                {{ item.cantidad }}
+              <td [routerLink]="['/detalle', item.ID]">
+                {{ item.TIPO_CEDULA }}
               </td>
-              <td [routerLink]="['/bodeguero/detalleProd', item.id]">
-                {{ item.precio }}
+              <td [routerLink]="['/detalle', item.ID]">
+                {{ item.DIRECCION }}
               </td>
-              <td [routerLink]="['/bodeguero/detalleProd', item.id]">
-                {{ item.precio }}
+              <td [routerLink]="['/detalle', item.ID]">
+                {{ item.PRECIO }}
+              </td>
+              <td [routerLink]="['/detalle', item.ID]">
+                {{ item.NOMBRE_OWNER }}
               </td>
               <td class="">
                 <i (click)="eliminarItem(item.id)" class="fas fa-trash-alt"></i>

@@ -10,6 +10,7 @@ import { RentarPropiedadComponent } from './components/rentar-propiedad/rentar-p
 import { FooterComponent } from './components/footer/footer.component';
 import { NavComponent } from './components/nav/nav.component';
 import { AgregarPropiedadComponent } from './components/agregar-propiedad/agregar-propiedad.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AgregarPropiedadComponent } from './components/agregar-propiedad/agrega
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
