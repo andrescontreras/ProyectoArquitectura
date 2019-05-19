@@ -10,6 +10,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "REST_Financiera", "REST_Fin
 		{53089E53-9D4C-40B0-8B5B-96C400C4B072} = {53089E53-9D4C-40B0-8B5B-96C400C4B072}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SOAP_Financiera", "SOAP_Financiera\SOAP_Financiera.csproj", "{C578AACA-1088-46B9-A7B2-9FC638498501}"
+	ProjectSection(ProjectDependencies) = postProject
+		{53089E53-9D4C-40B0-8B5B-96C400C4B072} = {53089E53-9D4C-40B0-8B5B-96C400C4B072}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +29,10 @@ Global
 		{8D998ABA-D434-4BA2-9399-B36622C1CE0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D998ABA-D434-4BA2-9399-B36622C1CE0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D998ABA-D434-4BA2-9399-B36622C1CE0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C578AACA-1088-46B9-A7B2-9FC638498501}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C578AACA-1088-46B9-A7B2-9FC638498501}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C578AACA-1088-46B9-A7B2-9FC638498501}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C578AACA-1088-46B9-A7B2-9FC638498501}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
