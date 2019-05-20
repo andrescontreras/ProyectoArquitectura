@@ -10,7 +10,8 @@ import { Propiedad } from '../SideCar/Propiedad';
 export class RestBuscarPropiedadService {
 
   baseUrl = environment.baseUrl;
-  url = this.baseUrl + '/propieda';
+  // url = this.baseUrl + '/propieda';
+  url = 'http://10.192.12.44:8080/WebApplicationPruebaREST/webresources/entities.propiedad'
   constructor(private http: HttpClient) {
   }
 

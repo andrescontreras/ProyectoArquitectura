@@ -36,22 +36,22 @@
                 [routerLink]="['/detalle', item.ID]"
                 scope="row"
               >
-                {{ item.ID }}
+                {{ item.id }}
               </th>
               <td [routerLink]="['/detalle', item.ID]">
-                {{ item.NOMBRE }}
+                {{ item.nombre }}
               </td>
               <td [routerLink]="['/detalle', item.ID]">
-                {{ item.TIPO_CEDULA }}
+                {{ item.tipoCedula }}
               </td>
               <td [routerLink]="['/detalle', item.ID]">
-                {{ item.DIRECCION }}
+                {{ item.direccion }}
               </td>
               <td [routerLink]="['/detalle', item.ID]">
-                {{ item.PRECIO }}
+                {{ item.precio }}
               </td>
               <td [routerLink]="['/detalle', item.ID]">
-                {{ item.NOMBRE_OWNER }}
+                {{ item.nombreOwner }}
               </td>
               <td class="">
                 <i (click)="eliminarItem(item.id)" class="fas fa-trash-alt"></i>

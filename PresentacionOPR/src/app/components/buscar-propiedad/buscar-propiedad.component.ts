@@ -13,53 +13,13 @@ export class BuscarPropiedadComponent implements OnInit {
   constructor(private service: RestBuscarPropiedadService) { }
 
   ngOnInit() {
-   this.llenarDatosPrueba();
-  //  this.getDatos();
+  //  this.llenarDatosPrueba();
+   this.getDatos();
   }
 
   getDatos(){
     console.log("ENTRO get datos");
     this.service.getAllData().subscribe(p => this.propiedades = p);
-  }
-
-  llenarDatosPrueba(){
-    this.propiedades = [
-      {
-        ID: 1,
-        NOMBRE: 'nombre1',
-        NOMBRE_OWNER: 'aaaaa',
-        CEDULA_OWNER: 123456,
-        TIPO_CEDULA: 't1',
-        DIRECCION: 'direccion',
-        PRECIO: 2000
-      },
-      {
-        ID: 1,
-        NOMBRE: 'nombre1',
-        NOMBRE_OWNER: 'aaaaa',
-        CEDULA_OWNER: 123456,
-        TIPO_CEDULA: 't1',
-        DIRECCION: 'direccion',
-        PRECIO: 2000
-      },
-      {
-        ID: 1,
-        NOMBRE: 'nombre1',
-        NOMBRE_OWNER: 'aaaaa',
-        CEDULA_OWNER: 123456,
-        TIPO_CEDULA: 't1',
-        DIRECCION: 'direccion',
-        PRECIO: 2000
-      },{
-        ID: 1,
-        NOMBRE: 'nombre1',
-        NOMBRE_OWNER: 'aaaaa',
-        CEDULA_OWNER: 123456,
-        TIPO_CEDULA: 't1',
-        DIRECCION: 'direccion',
-        PRECIO: 2000
-      }
-      ]
   }
 
 }
