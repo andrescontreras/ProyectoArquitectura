@@ -31,5 +31,12 @@ namespace PresentacionSOAP.Controllers
 			ProxyUsuarios.Usuario[] usuarios = proxy.GetAllUsuario();
 			return View(usuarios[0]);
 		}
+
+		public ActionResult Create()
+		{
+			ProxyUsuarios.WSUsuariosClient proxy = new ProxyUsuarios.WSUsuariosClient();
+			ProxyUsuarios.Usuario[] usuarios = proxy.GetAllUsuario();
+			return View(usuarios[0]);
+		}
 	}
 }
