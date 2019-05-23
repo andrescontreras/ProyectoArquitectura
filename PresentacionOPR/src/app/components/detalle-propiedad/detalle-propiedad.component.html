@@ -3,7 +3,7 @@
     <button class="btn btn-info text-left" [routerLink]="['/bodeguero/inventario']">Atras</button>
   </div>
   <div id="DatosPersonales" class="borde">
-    <h4 class="text-left">Detalle del producto</h4>
+    <h4 class="text-left">Detalle del Propiedad</h4>
     <div class="form-group row">
       <label for="nombres" class="col-auto col-sm-3 col-form-label text-right" >ID</label>
       <div class="col-11 col-sm-8 col-lg-7">
@@ -11,33 +11,63 @@
       </div>
     </div>
     <div class="form-group row">
-      <label for="Apellidos" class="col-auto col-sm-3 col-form-label text-right" >Cantidad</label>
+      <label for="Nombre" class="col-auto col-sm-3 col-form-label text-right" >Nombre propietario</label>
+      <div class="col-11 col-sm-8 col-lg-7">
+        <input class="form-control" type="text" placeholder="Manzana" [(ngModel)]="producto.nombre" name="nombre">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="Nombre" class="col-auto col-sm-3 col-form-label text-right" >Tipo cedula</label>
+      <div class="col-11 col-sm-8 col-lg-7">
+        <input class="form-control" type="text" placeholder="Manzana" [(ngModel)]="producto.nombre" name="nombre">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="Apellidos" class="col-auto col-sm-3 col-form-label text-right" >Cedula Propietario</label>
       <div class="col-11 col-sm-8 col-lg-7">
         <input class="form-control" type="text" placeholder="100" [(ngModel)]="producto.cantidad" name="cantidad" >
       </div>
     </div>
     <div class="form-group row">
-      <label for="Correo" class="col-auto col-sm-3 col-form-label text-right" >codigoSKU</label>
+      <label for="Nombre" class="col-auto col-sm-3 col-form-label text-right" >Nombre propiedad</label>
       <div class="col-11 col-sm-8 col-lg-7">
-        <input class="form-control" type="text" placeholder="fd33" [(ngModel)]="producto.codigoSKU" name="codigoSKU">
+        <input class="form-control" type="text" placeholder="Manzana" [(ngModel)]="producto.nombre" name="nombre">
       </div>
     </div>
     <div class="form-group row">
-      <label for="Nombre" class="col-auto col-sm-3 col-form-label text-right" >Nombre</label>
+      <label for="Nombre" class="col-auto col-sm-3 col-form-label text-right" >Tipo propiedad</label>
       <div class="col-11 col-sm-8 col-lg-7">
         <input class="form-control" type="text" placeholder="Manzana" [(ngModel)]="producto.nombre" name="nombre">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="Nombre" class="col-auto col-sm-3 col-form-label text-right" >Direccion</label>
+      <div class="col-11 col-sm-8 col-lg-7">
+        <input class="form-control" type="text" placeholder="Manzana" [(ngModel)]="producto.nombre" name="nombre">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="Nombre" class="col-auto col-sm-3 col-form-label text-right" >Localidad</label>
+      <div class="col-11 col-sm-8 col-lg-7">
+        <input class="form-control" type="text" placeholder="Manzana" [(ngModel)]="producto.nombre" name="nombre">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="Nombre" class="col-auto col-sm-3 col-form-label text-right" >Descripción</label>
+      <div class="col-11 col-sm-8 col-lg-7">
+        <input class="form-control" type="text" placeholder="Manzana" [(ngModel)]="producto.nombre" name="nombre">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="Precio" class="col-auto col-sm-3 col-form-label text-right" >Numero cuartos</label>
+      <div class="col-11 col-sm-8 col-lg-7">
+        <input class="form-control" type="number" placeholder="400" [(ngModel)]="producto.precio" name="precio">
       </div>
     </div>
     <div class="form-group row">
       <label for="Precio" class="col-auto col-sm-3 col-form-label text-right" >Precio</label>
       <div class="col-11 col-sm-8 col-lg-7">
         <input class="form-control" type="number" placeholder="400" [(ngModel)]="producto.precio" name="precio">
-      </div>
-    </div>
-    <div class="form-group row">
-      <label for="UndMed" class="col-auto col-sm-3 col-form-label text-right" >Unidad de medida</label>
-      <div class="col-11 col-sm-8 col-lg-7">
-          <input class="form-control" type="text" placeholder="Lt" [(ngModel)]="producto.undMed" name="undMed">
       </div>
     </div>
   </div>
