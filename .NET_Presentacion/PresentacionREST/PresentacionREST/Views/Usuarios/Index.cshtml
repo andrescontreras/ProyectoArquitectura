@@ -53,9 +53,9 @@
             @Html.DisplayFor(modelItem => item.saldo)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Edit", "Edit", new { id = Decimal.ToInt16(item.id_usuario) }) |
             @Html.ActionLink("Details", "Details", new {  id= Decimal.ToInt16(item.id_usuario) }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            @Html.ActionLink("Delete", "Delete", new { id = Decimal.ToInt16(item.id_usuario) })
         </td>
     </tr>
 }

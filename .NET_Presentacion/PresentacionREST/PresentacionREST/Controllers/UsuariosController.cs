@@ -11,7 +11,7 @@ namespace PresentacionREST.Controllers
     public class UsuariosController : Controller
     {
         // url
-		string Baseurl = "http://localhost:8081/api/";
+		string Baseurl = "http://localhost:8081/api/Usuarios";
 		// GET: Usuarios
 		public ActionResult Index()
         {
@@ -19,7 +19,7 @@ namespace PresentacionREST.Controllers
 
 			using (var client = new HttpClient())
 			{
-				client.BaseAddress = new Uri("http://localhost:8081/api/");
+				client.BaseAddress = new Uri(Baseurl);
 				//HTTP GET
 				var responseTask = client.GetAsync("Usuarios");
 				responseTask.Wait();
@@ -51,7 +51,7 @@ namespace PresentacionREST.Controllers
 
 			using (var client = new HttpClient())
 			{
-				client.BaseAddress = new Uri("http://localhost:8081/api/");
+				client.BaseAddress = new Uri(Baseurl);
 				//HTTP GET
 				var responseTask = client.GetAsync("Usuarios/"+id);
 				responseTask.Wait();
@@ -84,41 +84,73 @@ namespace PresentacionREST.Controllers
 
         // POST: Usuarios/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(UsuarioDTO usuario)
         {
-            try
-            {
-                // TODO: Add insert logic here
+			using (var client = new HttpClient())
+			{
+				client.BaseAddress = new Uri(Baseurl);
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+				//HTTP POST
+				var postTask = client.PostAsJsonAsync("Usuarios", usuario);
+				postTask.Wait();
+
+				var result = postTask.Result;
+				if (result.IsSuccessStatusCode)
+				{
+					return RedirectToAction("Index");
+				}
+			}
+
+			ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
+
+			return View(usuario);
+		}
 
         // GET: Usuarios/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
-        }
+			UsuarioDTO student = null;
+
+			using (var client = new HttpClient())
+			{
+				client.BaseAddress = new Uri(Baseurl);
+				//HTTP GET
+				var responseTask = client.GetAsync("Usuarios/" + id);
+				responseTask.Wait();
+
+				var result = responseTask.Result;
+				if (result.IsSuccessStatusCode)
+				{
+					var readTask = result.Content.ReadAsAsync<UsuarioDTO>();
+					readTask.Wait();
+
+					student = readTask.Result;
+				}
+			}
+			return View(student);
+		}
 
         // POST: Usuarios/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(UsuarioDTO usuario)
         {
-            try
-            {
-                // TODO: Add update logic here
+			using (var client = new HttpClient())
+			{
+				client.BaseAddress = new Uri(Baseurl);
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+				//HTTP POST
+				var putTask = client.PutAsJsonAsync("Usuarios", usuario);
+				putTask.Wait();
+
+				var result = putTask.Result;
+				if (result.IsSuccessStatusCode)
+				{
+
+					return RedirectToAction("Index");
+				}
+			}
+			return View(usuario);
+		}
 
         // GET: Usuarios/Delete/5
         public ActionResult Delete(int id)
