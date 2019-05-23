@@ -155,23 +155,47 @@ namespace PresentacionREST.Controllers
         // GET: Usuarios/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
-        }
+			UsuarioDTO usuario= null;
+
+			using (var client = new HttpClient())
+			{
+				client.BaseAddress = new Uri(Baseurl);
+				//HTTP GET
+				var responseTask = client.GetAsync("Usuarios/" + id);
+				responseTask.Wait();
+
+				var result = responseTask.Result;
+				if (result.IsSuccessStatusCode)
+				{
+					var readTask = result.Content.ReadAsAsync<UsuarioDTO>();
+					readTask.Wait();
+
+					usuario = readTask.Result;
+				}
+			}
+			return View(usuario);
+		}
 
         // POST: Usuarios/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
-            try
-            {
-                // TODO: Add delete logic here
+			using (var client = new HttpClient())
+			{
+				client.BaseAddress = new Uri(Baseurl);
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+				//HTTP POST
+				var putTask = client.DeleteAsync("Usuarios/"+ id);
+				putTask.Wait();
+
+				var result = putTask.Result;
+				if (result.IsSuccessStatusCode)
+				{
+
+					return RedirectToAction("Index");
+				}
+			}
+			return View();
+		}
     }
 }
