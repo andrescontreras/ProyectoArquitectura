@@ -49,16 +49,11 @@ namespace REST_Financiera.Controllers
 
         // PUT: api/Usuarios/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutUsuario(decimal id, Usuario usuario)
+        public IHttpActionResult PutUsuario(Usuario usuario)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
-            }
-
-            if (id != usuario.id_usuario)
-            {
-                return BadRequest();
             }
 
             db.Entry(usuario).State = EntityState.Modified;
@@ -69,7 +64,7 @@ namespace REST_Financiera.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UsuarioExists(id))
+                if (!UsuarioExists(usuario.id_usuario))
                 {
                     return NotFound();
                 }
