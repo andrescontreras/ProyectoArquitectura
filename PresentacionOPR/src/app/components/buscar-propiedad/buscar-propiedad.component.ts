@@ -10,6 +10,9 @@ import { RestBuscarPropiedadService } from 'src/app/services/proxy-buscar-propie
 export class BuscarPropiedadComponent implements OnInit {
 
   propiedades: Propiedad[] = [];
+  busqueda = "";
+  marked1 = true;
+  marked2 = false;
   constructor(private service: RestBuscarPropiedadService) { }
 
   ngOnInit() {
@@ -20,6 +23,27 @@ export class BuscarPropiedadComponent implements OnInit {
   getDatos(){
     console.log("ENTRO get datos");
     this.service.getAllData().subscribe(p => this.propiedades = p);
+  }
+
+  valor1()
+  {
+    this.marked1 = true;
+    this.marked2 = !this.marked1;
+    
+  }
+  valor2()
+  {
+    this.marked2 = true;
+    this.marked1 = !this.marked2;
+    
+  }
+
+  buscarPropiedad(){
+    if(this.marked1){
+      this.service.getPropiedadPorNombre(this.busqueda).subscribe(p => this.propiedades = p);
+    }else{
+      this.service.getPropiedadPorCedula(this.busqueda).subscribe(p => this.propiedades = p);
+    }
   }
 
 }
