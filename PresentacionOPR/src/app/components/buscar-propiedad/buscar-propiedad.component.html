@@ -47,24 +47,24 @@
           <tbody>
             <tr *ngFor="let item of propiedades; let i = index">
               <th
-                [routerLink]="['/detalle', item.ID]"
+                [routerLink]="['/detalle', item.id]"
                 scope="row"
               >
                 {{ item.id }}
               </th>
-              <td [routerLink]="['/detalle', item.ID]">
+              <td [routerLink]="['/detalle', item.id]">
                 {{ item.nombre }}
               </td>
-              <td [routerLink]="['/detalle', item.ID]">
+              <td [routerLink]="['/detalle', item.id]">
                 {{ item.tipoCedula }}
               </td>
-              <td [routerLink]="['/detalle', item.ID]">
+              <td [routerLink]="['/detalle', item.id]">
                 {{ item.direccion }}
               </td>
-              <td [routerLink]="['/detalle', item.ID]">
+              <td [routerLink]="['/detalle', item.id]">
                 {{ item.precio }}
               </td>
-              <td [routerLink]="['/detalle', item.ID]">
+              <td [routerLink]="['/detalle', item.id]">
                 {{ item.nombreOwner }}
               </td>
               <td class="">

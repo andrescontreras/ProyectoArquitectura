@@ -11,7 +11,7 @@ export class RestBuscarPropiedadService {
 
   baseUrl = environment.baseUrl;
   // url = this.baseUrl + '/propieda';
-  url = 'http://10.192.12.44:8080/OPR/webresources/entities.propiedad'
+  url = 'http://10.139.22.109:8080/OPR/webresources/entities.propiedad'
   constructor(private http: HttpClient) {
   }
 
@@ -34,6 +34,11 @@ export class RestBuscarPropiedadService {
     });
   }
 
+  getPropiedadPorId(id: number){
+    return this.http.get<Propiedad>(this.url + '/' + id  , {
+      withCredentials: true
+    });
+  }
 
   getClienteby(id: number): Observable<Propiedad>{
     return this.http.get<Propiedad>(this.url , {

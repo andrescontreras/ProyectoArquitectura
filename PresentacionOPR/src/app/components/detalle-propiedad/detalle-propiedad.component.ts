@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Propiedad } from 'src/app/SideCar/Propiedad';
+import { RestBuscarPropiedadService } from 'src/app/services/proxy-buscar-propiedad.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-detalle-propiedad',
@@ -7,26 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetallePropiedadComponent implements OnInit {
 
-  equipo: any[] = [];
   id: number;
-  producto : any;
-  constructor() { }
+  propiedad : Propiedad;
+  constructor(private service: RestBuscarPropiedadService,private ruta: ActivatedRoute) { }
 
   ngOnInit() {
-    this.producto = [{
-      id: 1,
-      cantidad: 1000,
-      codigoSKU: 'abc',
-      nombre: 'nombre1',
-      precio: 200,
-      undMed: 'Lb'
-    }];
-    console.log(this.producto);
-    this.getDatos();
+    this.ruta.params.subscribe(params => {
+      console.log(params['id'] );
+      this.id = params['id'];
+      // tslint:disable-next-line:comment-format
+      //this.equipo = this._servicio.obtenerUno(params['id'] );
+      this.getPropiedad();
+    } );
   }
-  getDatos(){
+  getPropiedad(){
     // console.log("ENTRO get datos del detalle del producto");
-    // this.service.getProductoByID(this.id).subscribe(p => this.producto = p);
+    this.service.getPropiedadPorId(this.id).subscribe(p => this.propiedad = p);
   }
   cambiarProducto(){
     // console.log("ENTRO get datos del detalle del producto");
