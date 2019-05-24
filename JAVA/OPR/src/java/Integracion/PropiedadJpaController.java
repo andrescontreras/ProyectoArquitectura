@@ -226,16 +226,14 @@ public class PropiedadJpaController implements Serializable {
     public List<Propiedad> getPropiedadesxNombre(String nombre)
     {
         EntityManager em = getEntityManager();
-        Query query = em.createQuery("Select e from Propiedad e WHERE e.nombre=:arg1");
-        query.setParameter("arg1", nombre);
+        Query query = em.createQuery("Select e from Propiedad e WHERE e.nombre LIKE '%"+nombre+"%'");
         List<Propiedad> list = query.getResultList();
         return list;
     }
     public List<Propiedad> getPropiedadesxCedula(BigDecimal cedula)
     {
         EntityManager em = getEntityManager();
-        Query query = em.createQuery("Select e from Propiedad e WHERE e.cedulaOwner=:arg1");
-        query.setParameter("arg1", cedula);
+        Query query = em.createQuery("Select e from Propiedad e WHERE e.cedulaOwner LIKE '%"+cedula+"%'");
         List<Propiedad> list = query.getResultList();
         return list;
     }
