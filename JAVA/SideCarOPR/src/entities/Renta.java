@@ -28,32 +28,35 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "RENTA")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Renta.findAll", query = "SELECT r FROM Renta r")
-    , @NamedQuery(name = "Renta.findById", query = "SELECT r FROM Renta r WHERE r.id = :id")
-    , @NamedQuery(name = "Renta.findByIdUsuario", query = "SELECT r FROM Renta r WHERE r.idUsuario = :idUsuario")
-    , @NamedQuery(name = "Renta.findByEmail", query = "SELECT r FROM Renta r WHERE r.email = :email")
-    , @NamedQuery(name = "Renta.findByPrecioRenta", query = "SELECT r FROM Renta r WHERE r.precioRenta = :precioRenta")
-    , @NamedQuery(name = "Renta.findByFecha", query = "SELECT r FROM Renta r WHERE r.fecha = :fecha")})
+    @NamedQuery(name = "Renta.findAll", query = "SELECT r FROM Renta r"),
+    @NamedQuery(name = "Renta.findById", query = "SELECT r FROM Renta r WHERE r.id = :id"),
+    @NamedQuery(name = "Renta.findByCedulaUsuario", query = "SELECT r FROM Renta r WHERE r.cedulaUsuario = :cedulaUsuario"),
+    @NamedQuery(name = "Renta.findByEmail", query = "SELECT r FROM Renta r WHERE r.email = :email"),
+    @NamedQuery(name = "Renta.findByPrecioRenta", query = "SELECT r FROM Renta r WHERE r.precioRenta = :precioRenta"),
+    @NamedQuery(name = "Renta.findByFecha", query = "SELECT r FROM Renta r WHERE r.fecha = :fecha"),
+    @NamedQuery(name = "Renta.findByEstado", query = "SELECT r FROM Renta r WHERE r.estado = :estado")})
 public class Renta implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "ID")
     private Short id;
     @Basic(optional = false)
-    @Column(name = "ID_USUARIO")
-    private short idUsuario;
+    @Column(name = "CEDULA_USUARIO")
+    private long cedulaUsuario;
     @Basic(optional = false)
     @Column(name = "EMAIL")
     private String email;
     @Basic(optional = false)
     @Column(name = "PRECIO_RENTA")
-    private int precioRenta;
+    private long precioRenta;
     @Basic(optional = false)
     @Column(name = "FECHA")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
+    @Basic(optional = false)
+    @Column(name = "ESTADO")
+    private Character estado;
     @JoinColumn(name = "ID_PROPIEDAD", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Propiedad idPropiedad;
@@ -65,12 +68,13 @@ public class Renta implements Serializable {
         this.id = id;
     }
 
-    public Renta(Short id, short idUsuario, String email, int precioRenta, Date fecha) {
+    public Renta(Short id, long cedulaUsuario, String email, long precioRenta, Date fecha, Character estado) {
         this.id = id;
-        this.idUsuario = idUsuario;
+        this.cedulaUsuario = cedulaUsuario;
         this.email = email;
         this.precioRenta = precioRenta;
         this.fecha = fecha;
+        this.estado = estado;
     }
 
     public Short getId() {
@@ -81,12 +85,12 @@ public class Renta implements Serializable {
         this.id = id;
     }
 
-    public short getIdUsuario() {
-        return idUsuario;
+    public long getCedulaUsuario() {
+        return cedulaUsuario;
     }
 
-    public void setIdUsuario(short idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setCedulaUsuario(long cedulaUsuario) {
+        this.cedulaUsuario = cedulaUsuario;
     }
 
     public String getEmail() {
@@ -97,11 +101,11 @@ public class Renta implements Serializable {
         this.email = email;
     }
 
-    public int getPrecioRenta() {
+    public long getPrecioRenta() {
         return precioRenta;
     }
 
-    public void setPrecioRenta(int precioRenta) {
+    public void setPrecioRenta(long precioRenta) {
         this.precioRenta = precioRenta;
     }
 
@@ -111,6 +115,14 @@ public class Renta implements Serializable {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    public Character getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Character estado) {
+        this.estado = estado;
     }
 
     public Propiedad getIdPropiedad() {
