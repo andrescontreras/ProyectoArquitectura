@@ -29,14 +29,14 @@ import javax.ws.rs.Produces;
 public class PropiedadFacadeREST {
    PropiedadFacade p = new PropiedadFacade();
     @POST
-    @Consumes({"application/xml", "application/json"})
+    @Consumes({ "application/json"})
     public void create(Propiedad entity) {
         
     }
 
     @PUT
     @Path("{id}")
-    @Consumes({"application/xml", "application/json"})
+    @Consumes({"application/json"})
     public void edit(@PathParam("id") Short id, Propiedad entity) {
     }
 
@@ -48,13 +48,13 @@ public class PropiedadFacadeREST {
 
     @GET
     @Path("{id}")
-    @Produces({"application/xml", "application/json"})
+    @Produces({"application/json"})
     public Propiedad find(@PathParam("id") Short id) {
         return null;
     }
 
     @GET
-    @Produces({"application/xml", "application/json"})
+    @Produces({"application/json"})
     public List<Propiedad> findAll() {
         
        return p.getPropiedades();
@@ -62,7 +62,7 @@ public class PropiedadFacadeREST {
 
     @GET
     @Path("{from}/{to}")
-    @Produces({"application/xml", "application/json"})
+    @Produces({"application/json"})
     public List<Propiedad> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return null;
     }
