@@ -21,6 +21,10 @@ import javax.persistence.PersistenceContext;
 public class PropiedadFacade{
     
     PropiedadJpaController jpa = new PropiedadJpaController();
+    
+    public Propiedad getPropiedad(Short id){
+        return jpa.findPropiedad(id);
+    }
     public List<Propiedad> getPropiedades(){
         return jpa.getPropiedades();
     }

@@ -53,13 +53,12 @@ public class PropiedadFacadeREST {
     @Path("{id}")
     @Produces({"application/json"})
     public Propiedad find(@PathParam("id") Short id) {
-        return null;
+        return p.getPropiedad(id);
     }
-
+    
     @GET
     @Produces({"application/json"})
-    public List<Propiedad> obtenerPropiedades() {
-
+    public List<Propiedad> obtenerPropiedades(){
         return p.getPropiedades();
     }
 
