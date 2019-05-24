@@ -7,6 +7,7 @@ package Negocio;
 
 import Integracion.PropiedadJpaController;
 import entities.Propiedad;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -22,6 +23,12 @@ public class PropiedadFacade{
     PropiedadJpaController jpa = new PropiedadJpaController();
     public List<Propiedad> getPropiedades(){
         return jpa.getPropiedades();
+    }
+    public List<Propiedad> getPropiedadesxNombre(String nombre){
+        return jpa.getPropiedadesxNombre(nombre);
+    }
+    public List<Propiedad> getPropiedadesxCedula(BigDecimal cedula){
+        return jpa.getPropiedadesxCedula(cedula);
     }
     
 }

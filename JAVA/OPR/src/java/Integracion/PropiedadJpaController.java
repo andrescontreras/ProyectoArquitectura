@@ -15,6 +15,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import entities.Renta;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -221,6 +222,22 @@ public class PropiedadJpaController implements Serializable {
         EntityManager em = getEntityManager();
         Query query = em.createQuery("Select e from Propiedad e");
         return (List<Propiedad>)query.getResultList();
+    }
+    public List<Propiedad> getPropiedadesxNombre(String nombre)
+    {
+        EntityManager em = getEntityManager();
+        Query query = em.createQuery("Select e from Propiedad e WHERE e.nombre=:arg1");
+        query.setParameter("arg1", nombre);
+        List<Propiedad> list = query.getResultList();
+        return list;
+    }
+    public List<Propiedad> getPropiedadesxCedula(BigDecimal cedula)
+    {
+        EntityManager em = getEntityManager();
+        Query query = em.createQuery("Select e from Propiedad e WHERE e.cedulaOwner=:arg1");
+        query.setParameter("arg1", cedula);
+        List<Propiedad> list = query.getResultList();
+        return list;
     }
     
 }
