@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -27,25 +29,41 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "PROPIEDAD")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Propiedad.findAll", query = "SELECT p FROM Propiedad p")
-    , @NamedQuery(name = "Propiedad.findById", query = "SELECT p FROM Propiedad p WHERE p.id = :id")
-    , @NamedQuery(name = "Propiedad.findByIdOwner", query = "SELECT p FROM Propiedad p WHERE p.idOwner = :idOwner")
-    , @NamedQuery(name = "Propiedad.findByTipo", query = "SELECT p FROM Propiedad p WHERE p.tipo = :tipo")
-    , @NamedQuery(name = "Propiedad.findByDireccion", query = "SELECT p FROM Propiedad p WHERE p.direccion = :direccion")
-    , @NamedQuery(name = "Propiedad.findByLocalidad", query = "SELECT p FROM Propiedad p WHERE p.localidad = :localidad")
-    , @NamedQuery(name = "Propiedad.findByNumCuartos", query = "SELECT p FROM Propiedad p WHERE p.numCuartos = :numCuartos")
-    , @NamedQuery(name = "Propiedad.findByPrecio", query = "SELECT p FROM Propiedad p WHERE p.precio = :precio")
-    , @NamedQuery(name = "Propiedad.findByRentada", query = "SELECT p FROM Propiedad p WHERE p.rentada = :rentada")})
+    @NamedQuery(name = "Propiedad.findAll", query = "SELECT p FROM Propiedad p"),
+    @NamedQuery(name = "Propiedad.findById", query = "SELECT p FROM Propiedad p WHERE p.id = :id"),
+    @NamedQuery(name = "Propiedad.findByNombreOwner", query = "SELECT p FROM Propiedad p WHERE p.nombreOwner = :nombreOwner"),
+    @NamedQuery(name = "Propiedad.findByCedulaOwner", query = "SELECT p FROM Propiedad p WHERE p.cedulaOwner = :cedulaOwner"),
+    @NamedQuery(name = "Propiedad.findByNombre", query = "SELECT p FROM Propiedad p WHERE p.nombre = :nombre"),
+    @NamedQuery(name = "Propiedad.findByDescripcion", query = "SELECT p FROM Propiedad p WHERE p.descripcion = :descripcion"),
+    @NamedQuery(name = "Propiedad.findByTipoCedula", query = "SELECT p FROM Propiedad p WHERE p.tipoCedula = :tipoCedula"),
+    @NamedQuery(name = "Propiedad.findByTipo", query = "SELECT p FROM Propiedad p WHERE p.tipo = :tipo"),
+    @NamedQuery(name = "Propiedad.findByDireccion", query = "SELECT p FROM Propiedad p WHERE p.direccion = :direccion"),
+    @NamedQuery(name = "Propiedad.findByLocalidad", query = "SELECT p FROM Propiedad p WHERE p.localidad = :localidad"),
+    @NamedQuery(name = "Propiedad.findByNumCuartos", query = "SELECT p FROM Propiedad p WHERE p.numCuartos = :numCuartos"),
+    @NamedQuery(name = "Propiedad.findByPrecio", query = "SELECT p FROM Propiedad p WHERE p.precio = :precio"),
+    @NamedQuery(name = "Propiedad.findByRentada", query = "SELECT p FROM Propiedad p WHERE p.rentada = :rentada")})
 public class Propiedad implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID", insertable = false )
     private Short id;
     @Basic(optional = false)
-    @Column(name = "ID_OWNER")
-    private short idOwner;
+    @Column(name = "NOMBRE_OWNER")
+    private String nombreOwner;
+    @Basic(optional = false)
+    @Column(name = "CEDULA_OWNER")
+    private long cedulaOwner;
+    @Basic(optional = false)
+    @Column(name = "NOMBRE")
+    private String nombre;
+    @Basic(optional = false)
+    @Column(name = "DESCRIPCION")
+    private String descripcion;
+    @Basic(optional = false)
+    @Column(name = "TIPO_CEDULA")
+    private String tipoCedula;
     @Basic(optional = false)
     @Column(name = "TIPO")
     private String tipo;
@@ -74,9 +92,13 @@ public class Propiedad implements Serializable {
         this.id = id;
     }
 
-    public Propiedad(Short id, short idOwner, String tipo, String direccion, String localidad, short numCuartos, int precio, Character rentada) {
+    public Propiedad(Short id, String nombreOwner, long cedulaOwner, String nombre, String descripcion, String tipoCedula, String tipo, String direccion, String localidad, short numCuartos, int precio, Character rentada) {
         this.id = id;
-        this.idOwner = idOwner;
+        this.nombreOwner = nombreOwner;
+        this.cedulaOwner = cedulaOwner;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.tipoCedula = tipoCedula;
         this.tipo = tipo;
         this.direccion = direccion;
         this.localidad = localidad;
@@ -93,12 +115,44 @@ public class Propiedad implements Serializable {
         this.id = id;
     }
 
-    public short getIdOwner() {
-        return idOwner;
+    public String getNombreOwner() {
+        return nombreOwner;
     }
 
-    public void setIdOwner(short idOwner) {
-        this.idOwner = idOwner;
+    public void setNombreOwner(String nombreOwner) {
+        this.nombreOwner = nombreOwner;
+    }
+
+    public long getCedulaOwner() {
+        return cedulaOwner;
+    }
+
+    public void setCedulaOwner(long cedulaOwner) {
+        this.cedulaOwner = cedulaOwner;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getTipoCedula() {
+        return tipoCedula;
+    }
+
+    public void setTipoCedula(String tipoCedula) {
+        this.tipoCedula = tipoCedula;
     }
 
     public String getTipo() {
