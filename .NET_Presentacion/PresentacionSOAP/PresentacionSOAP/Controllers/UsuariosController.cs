@@ -19,17 +19,26 @@ namespace PresentacionSOAP.Controllers
 			return View(usuarios.ToList());
 		}
 
-		public ActionResult Edit() {
+		public ActionResult Edit(int id) {
+
 			ProxyUsuarios.WSUsuariosClient proxy = new ProxyUsuarios.WSUsuariosClient();
-			ProxyUsuarios.Usuario[] usuarios = proxy.GetAllUsuario();
-			return View(usuarios[0]);
+			var u = proxy.GetAllUsuarioById(id);
+			return View(u);
+		}
+		[HttpPost]
+		public ActionResult Edit(ProxyUsuarios.Usuario usuario)
+		{
+
+			ProxyUsuarios.WSUsuariosClient proxy = new ProxyUsuarios.WSUsuariosClient();
+			var u = proxy.UpdateUsuario(usuario);
+			return View(u);
 		}
 
-		public ActionResult Details()
+		public ActionResult Details(int id)
 		{
 			ProxyUsuarios.WSUsuariosClient proxy = new ProxyUsuarios.WSUsuariosClient();
-			ProxyUsuarios.Usuario[] usuarios = proxy.GetAllUsuario();
-			return View(usuarios[0]);
+			ProxyUsuarios.Usuario usuario = proxy.GetAllUsuarioById(id);
+			return View(usuario);
 		}
 
 		public ActionResult Create()
