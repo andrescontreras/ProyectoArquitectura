@@ -46,8 +46,34 @@ namespace PresentacionREST.Controllers
         // GET: Movimientos/Details/5
         public ActionResult Details(int id)
         {
-            return View();
-        }
+			MovimientoDTO movimiento = null;
+
+			using (var client = new HttpClient())
+			{
+				client.BaseAddress = new Uri(Baseurl);
+				//HTTP GET
+				var responseTask = client.GetAsync("Movimientos/" + id);
+				responseTask.Wait();
+
+				var result = responseTask.Result;
+				if (result.IsSuccessStatusCode)
+				{
+					var readTask = result.Content.ReadAsAsync<MovimientoDTO>();
+					readTask.Wait();
+
+					movimiento = readTask.Result;
+				}
+				else //web api sent error response 
+				{
+					//log response status here..
+
+					movimiento = new MovimientoDTO();
+
+					ModelState.AddModelError(string.Empty, "Server error. Please contact administrator.");
+				}
+			}
+			return View(movimiento);
+		}
 
         // GET: Movimientos/Create
         public ActionResult Create()
