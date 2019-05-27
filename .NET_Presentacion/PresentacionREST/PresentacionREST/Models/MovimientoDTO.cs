@@ -8,7 +8,7 @@ namespace PresentacionREST.Models
 	public class MovimientoDTO
 	{
 		public int id_movimiento { get; set; }
-		public Nullable<decimal> num_aprovacion { get; set; }
+		public int? num_aprovacion { get; set; }
 		public int valor { get; set; }
 		public System.DateTime fecha { get; set; }
 		public bool estado { get; set; }

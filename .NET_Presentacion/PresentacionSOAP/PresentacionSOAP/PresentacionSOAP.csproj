@@ -90,12 +90,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Connected Services\ProxyMovimientos\PresentacionSOAP.ProxyMovimientos.Movimiento.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Connected Services\ProxyUsuarios\configuration91.svcinfo" />
     <None Include="Connected Services\ProxyUsuarios\configuration.svcinfo" />
     <Content Include="Connected Services\ProxyUsuarios\PresentacionSOAP.ProxyUsuarios.Usuario.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Connected Services\ProxyUsuarios\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\ProxyMovimientos\configuration91.svcinfo" />
+    <None Include="Connected Services\ProxyMovimientos\configuration.svcinfo" />
+    <None Include="Connected Services\ProxyMovimientos\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -109,6 +118,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <None Include="Connected Services\ProxyMovimientos\WSMovimientos.wsdl" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -136,6 +146,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\ProxyMovimientos\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\MovimientosController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -146,6 +162,9 @@
     <Content Include="Views\web.config" />
     <None Include="Connected Services\ProxyUsuarios\WSUsuarios.wsdl" />
     <None Include="packages.config" />
+    <Content Include="Views\Usuarios\Delete.cshtml" />
+    <Content Include="Views\Movimientos\List.cshtml" />
+    <Content Include="Views\Movimientos\Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -162,6 +181,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\ProxyUsuarios\" />
+    <WCFMetadataStorage Include="Connected Services\ProxyMovimientos\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

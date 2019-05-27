@@ -26,19 +26,19 @@ namespace PresentacionSOAP.ProxyUsuarios {
         private PresentacionSOAP.ProxyUsuarios.Movimiento[] MovimientoField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private decimal id_usuarioField;
+        private int id_usuarioField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string nombreField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private decimal numero_documentoField;
+        private int numero_documentoField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string passwordField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private decimal saldoField;
+        private int saldoField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string tipo_documentoField;
@@ -67,7 +67,7 @@ namespace PresentacionSOAP.ProxyUsuarios {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public decimal id_usuario {
+        public int id_usuario {
             get {
                 return this.id_usuarioField;
             }
@@ -93,7 +93,7 @@ namespace PresentacionSOAP.ProxyUsuarios {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public decimal numero_documento {
+        public int numero_documento {
             get {
                 return this.numero_documentoField;
             }
@@ -119,7 +119,7 @@ namespace PresentacionSOAP.ProxyUsuarios {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public decimal saldo {
+        public int saldo {
             get {
                 return this.saldoField;
             }

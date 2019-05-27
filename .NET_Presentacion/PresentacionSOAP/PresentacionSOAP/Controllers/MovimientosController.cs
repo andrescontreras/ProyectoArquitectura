@@ -1,53 +1,33 @@
-﻿using PresentacionREST.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 
-namespace PresentacionREST.Controllers
+namespace PresentacionSOAP.Controllers
 {
     public class MovimientosController : Controller
     {
-		string Baseurl = "http://localhost:8081/api/Movimientos";
-		// GET: Movimientos
-		public ActionResult Index()
-        {
-			IEnumerable<MovimientoDTO> movimientos = null;
-
-			using (var client = new HttpClient())
-			{
-				client.BaseAddress = new Uri(Baseurl);
-				//HTTP GET
-				var responseTask = client.GetAsync("Movimientos");
-				responseTask.Wait();
-
-				var result = responseTask.Result;
-				if (result.IsSuccessStatusCode)
-				{
-					var readTask = result.Content.ReadAsAsync<IList<MovimientoDTO>>();
-					readTask.Wait();
-
-					movimientos = readTask.Result;
-				}
-				else //web api sent error response 
-				{
-					//log response status here..
-
-					movimientos = Enumerable.Empty<MovimientoDTO>();
-
-					ModelState.AddModelError(string.Empty, "Server error. Please contact administrator.");
-				}
-			}
-			return View(movimientos);
-		}
-
-        // GET: Movimientos/Details/5
-        public ActionResult Details(int id)
+        // GET: Movimientos
+        public ActionResult Index()
         {
             return View();
         }
+
+		public ActionResult List()
+		{
+			ProxyMovimientos.WSMovimientosClient proxy = new ProxyMovimientos.WSMovimientosClient();
+			ProxyMovimientos.Movimiento[] movimientos = proxy.GetAllMovimiento();
+			return View(movimientos.ToList());
+		}
+
+		// GET: Movimientos/Details/5
+		public ActionResult Details(int id)
+        {
+			ProxyMovimientos.WSMovimientosClient proxy = new ProxyMovimientos.WSMovimientosClient();
+			ProxyMovimientos.Movimiento movimiento = proxy.GetAllMovimientoById(id);
+			return View(movimiento);
+		}
 
         // GET: Movimientos/Create
         public ActionResult Create()

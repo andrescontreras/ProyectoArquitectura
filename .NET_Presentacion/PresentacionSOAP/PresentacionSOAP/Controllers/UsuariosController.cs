@@ -31,7 +31,7 @@ namespace PresentacionSOAP.Controllers
 
 			ProxyUsuarios.WSUsuariosClient proxy = new ProxyUsuarios.WSUsuariosClient();
 			var u = proxy.UpdateUsuario(usuario);
-			return View(u);
+			return View();
 		}
 
 		public ActionResult Details(int id)
@@ -46,6 +46,28 @@ namespace PresentacionSOAP.Controllers
 			ProxyUsuarios.WSUsuariosClient proxy = new ProxyUsuarios.WSUsuariosClient();
 			ProxyUsuarios.Usuario[] usuarios = proxy.GetAllUsuario();
 			return View(usuarios[0]);
+		}
+		[HttpPost]
+		public ActionResult Create(ProxyUsuarios.Usuario usuario)
+		{
+			ProxyUsuarios.WSUsuariosClient proxy = new ProxyUsuarios.WSUsuariosClient();
+			var rusuario = proxy.AddUsuario(usuario);
+			return View();
+		}
+
+		public ActionResult Delete(int id)
+		{
+			ProxyUsuarios.WSUsuariosClient proxy = new ProxyUsuarios.WSUsuariosClient();
+			ProxyUsuarios.Usuario usuario = proxy.GetAllUsuarioById(id);
+			return View(usuario);
+		}
+
+		[HttpPost]
+		public ActionResult Delete(ProxyUsuarios.Usuario usuario)
+		{
+			ProxyUsuarios.WSUsuariosClient proxy = new ProxyUsuarios.WSUsuariosClient();
+			int rusuario = proxy.DeleteUsuarioById(usuario.id_usuario);
+			return View(usuario);
 		}
 	}
 }
