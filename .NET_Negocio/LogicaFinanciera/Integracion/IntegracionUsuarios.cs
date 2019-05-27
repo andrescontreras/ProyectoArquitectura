@@ -31,7 +31,19 @@ namespace LogicaFinanciera.Integracion
 		public Usuario GetUsuario(int id)
 		{
 			Usuario usuario = db.Usuario.Find(id);
-			return usuario;
+			if (usuario != null)
+			{
+				Usuario u = new Usuario();
+				u.id_usuario = usuario.id_usuario;
+				u.nombre = usuario.nombre;
+				u.numero_documento = usuario.numero_documento;
+				u.password = usuario.password;
+				u.saldo = usuario.saldo;
+				u.tipo_documento = usuario.tipo_documento;
+				return u;
+			}
+			return null;
+			
 		}
 
 		public Usuario EditUsuario(Usuario usuario)
