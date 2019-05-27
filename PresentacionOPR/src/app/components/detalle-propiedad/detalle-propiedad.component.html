@@ -1,6 +1,6 @@
 <div class="container">
-  <div class="text-left col p-0">
-    <button class="btn btn-info text-left" [routerLink]="['/bodeguero/inventario']">Atras</button>
+  <div class="text-left col my-2">
+    <button class="btn btn-info text-left" [routerLink]="['/buscar']">Atras</button>
   </div>
   <div id="DatosPersonales" class="borde">
     <h4 class="text-left">Detalle del Propiedad</h4>
@@ -77,9 +77,29 @@
     </div>
   </div>
   <div class="text-right col-12 my-2">
-    <button type="button" class="btn btn-info mx-1" data-toggle="modal" data-target="#confirmacion"
-      (click)="cambiarProducto()">Rentar</button>
+    <button type="button" class="btn btn-info mx-1" data-toggle="modal" data-target="#exampleModalCenter">
+      Rentar</button>
       <button type="button" class="btn btn-info mx-1" data-toggle="modal" data-target="#confirmacion"
       (click)="cambiarProducto()">Confirmar</button>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Rentar Propiedad</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div *ngIf ="propiedad.id" class="modal-body">
+       <app-rentar-propiedad [propiedad]="propiedad"
+       [id]="id">
+       </app-rentar-propiedad>
+      </div>
+    </div>
   </div>
 </div>

@@ -10,22 +10,23 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DetallePropiedadComponent implements OnInit {
 
-  id: number;
+  id = 0;
   propiedad : Propiedad;
+  
   constructor(private service: RestBuscarPropiedadService,private ruta: ActivatedRoute) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.ruta.params.subscribe(params => {
-      console.log(params['id'] );
       this.id = params['id'];
-      // tslint:disable-next-line:comment-format
-      //this.equipo = this._servicio.obtenerUno(params['id'] );
-      this.getPropiedad();
+      
+     
     } );
+     await this.getPropiedad();
   }
-  getPropiedad(){
+  async getPropiedad(){
+    this.propiedad = new Propiedad();
     // console.log("ENTRO get datos del detalle del producto");
-    this.service.getPropiedadPorId(this.id).subscribe(p => this.propiedad = p);
+    await this.service.getPropiedadPorId(this.id).subscribe(p => this.propiedad = p);
   }
   cambiarProducto(){
     // console.log("ENTRO get datos del detalle del producto");
