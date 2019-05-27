@@ -18,6 +18,6 @@ namespace PresentacionREST_JAVA.Models
 		public string localidad { get; set; }
 		public int numCuartos { get; set; }
 		public int precio { get; set; }
-		public bool tentada { get; set; }
+		public string rentada { get; set; }
 	}
 }

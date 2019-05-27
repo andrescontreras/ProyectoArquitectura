@@ -10,38 +10,102 @@ namespace PresentacionREST_JAVA.Controllers
 {
     public class PropiedadesController : Controller
     {
-		string Baseurl = "http://localhost:8081/api/Usuarios";
+		string Baseurl = "http://localhost:8080/OPR/webresources/entities.propiedad";
 
 		// GET: Propiedades
-		public ActionResult Index()
+		public ActionResult Index(string buscarPor, string buscar)
         {
-			IEnumerable<PropiedadDTO> propiedades = null;
-
-			using (var client = new HttpClient())
+			if (buscarPor == "cedula" && buscar != "")
 			{
-				client.BaseAddress = new Uri(Baseurl);
-				//HTTP GET
-				var responseTask = client.GetAsync("Usuarios");
-				responseTask.Wait();
+				IEnumerable<PropiedadDTO> propiedades = null;
 
-				var result = responseTask.Result;
-				if (result.IsSuccessStatusCode)
+				using (var client = new HttpClient())
 				{
-					var readTask = result.Content.ReadAsAsync<IList<PropiedadDTO>>();
-					readTask.Wait();
+					client.BaseAddress = new Uri(Baseurl);
+					//HTTP GET
+					var responseTask = client.GetAsync("entities.propiedad/cedula/"+buscar);
+					responseTask.Wait();
 
-					propiedades = readTask.Result;
+					var result = responseTask.Result;
+					if (result.IsSuccessStatusCode)
+					{
+						var readTask = result.Content.ReadAsAsync<IList<PropiedadDTO>>();
+						readTask.Wait();
+
+						propiedades = readTask.Result;
+					}
+					else //web api sent error response 
+					{
+						//log response status here..
+
+						propiedades = Enumerable.Empty<PropiedadDTO>();
+
+						ModelState.AddModelError(string.Empty, "Server error. Please contact administrator.");
+					}
 				}
-				else //web api sent error response 
-				{
-					//log response status here..
-
-					propiedades = Enumerable.Empty<PropiedadDTO>();
-
-					ModelState.AddModelError(string.Empty, "Server error. Please contact administrator.");
-				}
+				return View(propiedades);
 			}
-			return View(propiedades);
+			else if (buscarPor == "nombre" && buscar != "")
+			{
+				IEnumerable<PropiedadDTO> propiedades = null;
+
+				using (var client = new HttpClient())
+				{
+					client.BaseAddress = new Uri(Baseurl);
+					//HTTP GET
+					var responseTask = client.GetAsync("entities.propiedad/nombre/"+buscar);
+					responseTask.Wait();
+
+					var result = responseTask.Result;
+					if (result.IsSuccessStatusCode)
+					{
+						var readTask = result.Content.ReadAsAsync<IList<PropiedadDTO>>();
+						readTask.Wait();
+
+						propiedades = readTask.Result;
+					}
+					else //web api sent error response 
+					{
+						//log response status here..
+
+						propiedades = Enumerable.Empty<PropiedadDTO>();
+
+						ModelState.AddModelError(string.Empty, "Server error. Please contact administrator.");
+					}
+				}
+				return View(propiedades);
+			}
+			else {
+				IEnumerable<PropiedadDTO> propiedades = null;
+
+				using (var client = new HttpClient())
+				{
+					client.BaseAddress = new Uri(Baseurl);
+					//HTTP GET
+					var responseTask = client.GetAsync("entities.propiedad");
+					responseTask.Wait();
+
+					var result = responseTask.Result;
+					if (result.IsSuccessStatusCode)
+					{
+						var readTask = result.Content.ReadAsAsync<IList<PropiedadDTO>>();
+						readTask.Wait();
+
+						propiedades = readTask.Result;
+					}
+					else //web api sent error response 
+					{
+						//log response status here..
+
+						propiedades = Enumerable.Empty<PropiedadDTO>();
+
+						ModelState.AddModelError(string.Empty, "Server error. Please contact administrator.");
+					}
+				}
+				return View(propiedades);
+			}
+	
+			
 		}
 
         // GET: Propiedades/Details/5
@@ -53,7 +117,7 @@ namespace PresentacionREST_JAVA.Controllers
 			{
 				client.BaseAddress = new Uri(Baseurl);
 				//HTTP GET
-				var responseTask = client.GetAsync("Usuarios/" + id);
+				var responseTask = client.GetAsync("entities.propiedad/" + id);
 				responseTask.Wait();
 
 				var result = responseTask.Result;
@@ -91,7 +155,7 @@ namespace PresentacionREST_JAVA.Controllers
 				client.BaseAddress = new Uri(Baseurl);
 
 				//HTTP POST
-				var postTask = client.PostAsJsonAsync("Usuarios", propiedad);
+				var postTask = client.PostAsJsonAsync("entities.propiedad", propiedad);
 				postTask.Wait();
 
 				var result = postTask.Result;
@@ -115,7 +179,7 @@ namespace PresentacionREST_JAVA.Controllers
 			{
 				client.BaseAddress = new Uri(Baseurl);
 				//HTTP GET
-				var responseTask = client.GetAsync("Usuarios/" + id);
+				var responseTask = client.GetAsync("entities.propiedad/" + id);
 				responseTask.Wait();
 
 				var result = responseTask.Result;
@@ -139,7 +203,7 @@ namespace PresentacionREST_JAVA.Controllers
 				client.BaseAddress = new Uri(Baseurl);
 
 				//HTTP POST
-				var putTask = client.PutAsJsonAsync("Usuarios", propiedad);
+				var putTask = client.PutAsJsonAsync("entities.propiedad", propiedad);
 				putTask.Wait();
 
 				var result = putTask.Result;
@@ -161,7 +225,7 @@ namespace PresentacionREST_JAVA.Controllers
 			{
 				client.BaseAddress = new Uri(Baseurl);
 				//HTTP GET
-				var responseTask = client.GetAsync("Usuarios/" + id);
+				var responseTask = client.GetAsync("entities.propiedad/" + id);
 				responseTask.Wait();
 
 				var result = responseTask.Result;
@@ -185,7 +249,7 @@ namespace PresentacionREST_JAVA.Controllers
 				client.BaseAddress = new Uri(Baseurl);
 
 				//HTTP POST
-				var putTask = client.DeleteAsync("Usuarios/" + id);
+				var putTask = client.DeleteAsync("entities.propiedad/" + id);
 				putTask.Wait();
 
 				var result = putTask.Result;
@@ -197,5 +261,7 @@ namespace PresentacionREST_JAVA.Controllers
 			}
 			return View();
 		}
+
+
     }
 }
