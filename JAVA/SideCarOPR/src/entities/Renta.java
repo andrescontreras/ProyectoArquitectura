@@ -11,8 +11,6 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -42,14 +40,17 @@ public class Renta implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "ID",insertable=false)
+    @Column(name = "ID", insertable=false)
     private Short id;
     @Basic(optional = false)
     @NotNull
     @Column(name = "CEDULA_USUARIO")
     private long cedulaUsuario;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "ID_PROPIEDAD")
+    private Short idPropiedad;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 60)
@@ -59,23 +60,16 @@ public class Renta implements Serializable {
     @NotNull
     @Column(name = "PRECIO_RENTA")
     private long precioRenta;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "FECHA")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date fecha;
     @Basic(optional = false)
     @NotNull
     @Column(name = "ESTADO")
     private Character estado;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "FECHA_RENTA")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date fechaRenta;
-    @JoinColumn(name = "ID_PROPIEDAD", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
-    private Propiedad idPropiedad;
 
     public Renta() {
     }
@@ -84,14 +78,12 @@ public class Renta implements Serializable {
         this.id = id;
     }
 
-    public Renta(Short id, long cedulaUsuario, String email, long precioRenta, Date fecha, Character estado, Date fechaRenta) {
+    public Renta(Short id, long cedulaUsuario, String email, long precioRenta, Character estado) {
         this.id = id;
         this.cedulaUsuario = cedulaUsuario;
         this.email = email;
         this.precioRenta = precioRenta;
-        this.fecha = fecha;
         this.estado = estado;
-        this.fechaRenta = fechaRenta;
     }
 
     public Short getId() {
@@ -110,6 +102,14 @@ public class Renta implements Serializable {
         this.cedulaUsuario = cedulaUsuario;
     }
 
+    public Short getIdPropiedad() {
+        return idPropiedad;
+    }
+
+    public void setIdPropiedad(Short idPropiedad) {
+        this.idPropiedad = idPropiedad;
+    }
+    
     public String getEmail() {
         return email;
     }
@@ -148,14 +148,6 @@ public class Renta implements Serializable {
 
     public void setFechaRenta(Date fechaRenta) {
         this.fechaRenta = fechaRenta;
-    }
-
-    public Propiedad getIdPropiedad() {
-        return idPropiedad;
-    }
-
-    public void setIdPropiedad(Propiedad idPropiedad) {
-        this.idPropiedad = idPropiedad;
     }
 
     @Override

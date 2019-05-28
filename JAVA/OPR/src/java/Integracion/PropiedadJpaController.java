@@ -14,7 +14,6 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import entities.Renta;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -159,6 +158,7 @@ public class PropiedadJpaController implements Serializable {
         return list;
     }
     /*------------------------------------------ CONSULTAS DE RENTA --------------------------------------*/
+    /*
     public void agregarRenta(Renta renta){
         
         EntityManager em = getEntityManager();
@@ -182,4 +182,5 @@ public class PropiedadJpaController implements Serializable {
         System.out.println("Esta es la consulta ---> "+consulta);
   //      query.getSingleResult();
     }
+    */
 }

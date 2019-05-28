@@ -6,11 +6,9 @@
 package service;
 
 import Negocio.RentaFacade;
-import entities.Propiedad;
 import entities.Renta;
-import entities.TransaccionDTO;
-import java.util.Calendar;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -29,56 +27,68 @@ import javax.ws.rs.Produces;
  */
 @Stateless
 @Path("renta")
-public class RentaFacadeREST {
-    RentaFacade facadeR = new RentaFacade();
+public class RentaFacadeREST extends AbstractFacade<Renta> {
+    @PersistenceContext(unitName = "LogicaOPRPU")
+    private EntityManager em;
+    
+    @EJB
+    RentaFacade rentaF;
+    public RentaFacadeREST() {
+        super(Renta.class);
+    }
 
     @POST
-    @Consumes({"application/json"})
-    public void crearRenta(TransaccionDTO entity) {
-        Renta renta = new Renta();
-        renta.setCedulaUsuario(entity.getNumDocumento());
-        renta.setEmail(entity.getEmail());
-        //renta.setEstado(Character.MIN_VALUE);
-        renta.setEstado('0');
-        Calendar calDate = Calendar.getInstance();
-        java.sql.Date sqlDate = new java.sql.Date(calDate.getTimeInMillis());
-        renta.setFecha(sqlDate);
-        System.out.println("Esto es la fecha en sql que se manda "+sqlDate);
-        renta.setFechaRenta(sqlDate);
-        renta.setPrecioRenta(entity.getDescontar());
-        Propiedad propi =  new Propiedad();
-        propi.setCedulaOwner(123);
-        propi.setDescripcion("Descripcion");
-        propi.setDireccion("Direccion");
-        propi.setLocalidad("Localidad");
-        propi.setNombre("Nombre");
-        propi.setNombreOwner("NombreOwner");
-        propi.setNumCuartos((short)1);
-        propi.setPrecio(190);
-        propi.setRentada('0');
-        propi.setTipo("Tipo");
-        propi.setTipoCedula("TipoCedula");
-        facadeR.crearRenta(propi);
+    @Override
+    @Consumes({ "application/json"})
+    public void create(Renta entity) {
+        //super.create(entity); 
+        rentaF.crearRenta(entity);
     }
 
     @PUT
     @Path("{id}")
     @Consumes({"application/json"})
     public void edit(@PathParam("id") Short id, Renta entity) {
-        
+        super.edit(entity);
     }
 
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Short id) {
-        
+        super.remove(super.find(id));
     }
 
     @GET
     @Path("{id}")
     @Produces({"application/json"})
     public Renta find(@PathParam("id") Short id) {
-        return null;
+        return super.find(id);
+    }
+
+    @GET
+    @Override
+    @Produces({"application/json"})
+    public List<Renta> findAll() {
+        return super.findAll();
+    }
+
+    @GET
+    @Path("{from}/{to}")
+    @Produces({"application/json"})
+    public List<Renta> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+        return super.findRange(new int[]{from, to});
+    }
+
+    @GET
+    @Path("count")
+    @Produces("text/plain")
+    public String countREST() {
+        return String.valueOf(super.count());
+    }
+
+    @Override
+    protected EntityManager getEntityManager() {
+        return em;
     }
     
 }
