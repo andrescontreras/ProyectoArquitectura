@@ -18,10 +18,24 @@ import javax.persistence.PersistenceContext;
  * @author andre
  */
 @Stateless
-public class PropiedadFacade{
+public class PropiedadFacade extends AbstractFacade<Propiedad>{
     
+    @PersistenceContext(unitName = "LogicaOPRPU")
+    private EntityManager em;
+
+    @Override
+    protected EntityManager getEntityManager() {
+        return em;
+    }
+    
+    public PropiedadFacade() {
+        super(Propiedad.class);
+    }
     PropiedadJpaController jpa = new PropiedadJpaController();
     
+    public void crearPropiedad(Propiedad propiedad){
+        getEntityManager().persist(propiedad);
+    }
     public Propiedad getPropiedad(Short id){
         return jpa.findPropiedad(id);
     }

@@ -16,9 +16,13 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import entities.Renta;
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
+import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -31,112 +35,34 @@ import javax.transaction.UserTransaction;
 public class PropiedadJpaController implements Serializable {
 
     public PropiedadJpaController() {
-        this.utx = utx;
         this.emf =  Persistence.createEntityManagerFactory("LogicaOPRPU");
     }
-    private UserTransaction utx = null;
+    @Resource
+    private UserTransaction utx;
+
     private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
 
-    public void create(Propiedad propiedad) throws PreexistingEntityException, RollbackFailureException, Exception {
-        if (propiedad.getRentaCollection() == null) {
-            propiedad.setRentaCollection(new ArrayList<Renta>());
-        }
+    public void create(Propiedad propiedad) throws RollbackFailureException, Exception {
         EntityManager em = null;
         try {
-            utx.begin();
             em = getEntityManager();
-            Collection<Renta> attachedRentaCollection = new ArrayList<Renta>();
-            for (Renta rentaCollectionRentaToAttach : propiedad.getRentaCollection()) {
-                rentaCollectionRentaToAttach = em.getReference(rentaCollectionRentaToAttach.getClass(), rentaCollectionRentaToAttach.getId());
-                attachedRentaCollection.add(rentaCollectionRentaToAttach);
-            }
-            propiedad.setRentaCollection(attachedRentaCollection);
+            em.getTransaction().begin();
             em.persist(propiedad);
-            for (Renta rentaCollectionRenta : propiedad.getRentaCollection()) {
-                Propiedad oldIdPropiedadOfRentaCollectionRenta = rentaCollectionRenta.getIdPropiedad();
-                rentaCollectionRenta.setIdPropiedad(propiedad);
-                rentaCollectionRenta = em.merge(rentaCollectionRenta);
-                if (oldIdPropiedadOfRentaCollectionRenta != null) {
-                    oldIdPropiedadOfRentaCollectionRenta.getRentaCollection().remove(rentaCollectionRenta);
-                    oldIdPropiedadOfRentaCollectionRenta = em.merge(oldIdPropiedadOfRentaCollectionRenta);
-                }
-            }
-            utx.commit();
+            em.getTransaction().commit();
         } catch (Exception ex) {
             try {
-                utx.rollback();
             } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
-            if (findPropiedad(propiedad.getId()) != null) {
-                throw new PreexistingEntityException("Propiedad " + propiedad + " already exists.", ex);
-            }
             throw ex;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
         }
     }
 
-    public void edit(Propiedad propiedad) throws NonexistentEntityException, RollbackFailureException, Exception {
-        EntityManager em = null;
-        try {
-            utx.begin();
-            em = getEntityManager();
-            Propiedad persistentPropiedad = em.find(Propiedad.class, propiedad.getId());
-            Collection<Renta> rentaCollectionOld = persistentPropiedad.getRentaCollection();
-            Collection<Renta> rentaCollectionNew = propiedad.getRentaCollection();
-            Collection<Renta> attachedRentaCollectionNew = new ArrayList<Renta>();
-            for (Renta rentaCollectionNewRentaToAttach : rentaCollectionNew) {
-                rentaCollectionNewRentaToAttach = em.getReference(rentaCollectionNewRentaToAttach.getClass(), rentaCollectionNewRentaToAttach.getId());
-                attachedRentaCollectionNew.add(rentaCollectionNewRentaToAttach);
-            }
-            rentaCollectionNew = attachedRentaCollectionNew;
-            propiedad.setRentaCollection(rentaCollectionNew);
-            propiedad = em.merge(propiedad);
-            for (Renta rentaCollectionOldRenta : rentaCollectionOld) {
-                if (!rentaCollectionNew.contains(rentaCollectionOldRenta)) {
-                    rentaCollectionOldRenta.setIdPropiedad(null);
-                    rentaCollectionOldRenta = em.merge(rentaCollectionOldRenta);
-                }
-            }
-            for (Renta rentaCollectionNewRenta : rentaCollectionNew) {
-                if (!rentaCollectionOld.contains(rentaCollectionNewRenta)) {
-                    Propiedad oldIdPropiedadOfRentaCollectionNewRenta = rentaCollectionNewRenta.getIdPropiedad();
-                    rentaCollectionNewRenta.setIdPropiedad(propiedad);
-                    rentaCollectionNewRenta = em.merge(rentaCollectionNewRenta);
-                    if (oldIdPropiedadOfRentaCollectionNewRenta != null && !oldIdPropiedadOfRentaCollectionNewRenta.equals(propiedad)) {
-                        oldIdPropiedadOfRentaCollectionNewRenta.getRentaCollection().remove(rentaCollectionNewRenta);
-                        oldIdPropiedadOfRentaCollectionNewRenta = em.merge(oldIdPropiedadOfRentaCollectionNewRenta);
-                    }
-                }
-            }
-            utx.commit();
-        } catch (Exception ex) {
-            try {
-                utx.rollback();
-            } catch (Exception re) {
-                throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
-            }
-            String msg = ex.getLocalizedMessage();
-            if (msg == null || msg.length() == 0) {
-                Short id = propiedad.getId();
-                if (findPropiedad(id) == null) {
-                    throw new NonexistentEntityException("The propiedad with id " + id + " no longer exists.");
-                }
-            }
-            throw ex;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
-    }
+
 
     public void destroy(Short id) throws NonexistentEntityException, RollbackFailureException, Exception {
         EntityManager em = null;
@@ -149,11 +75,6 @@ public class PropiedadJpaController implements Serializable {
                 propiedad.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The propiedad with id " + id + " no longer exists.", enfe);
-            }
-            Collection<Renta> rentaCollection = propiedad.getRentaCollection();
-            for (Renta rentaCollectionRenta : rentaCollection) {
-                rentaCollectionRenta.setIdPropiedad(null);
-                rentaCollectionRenta = em.merge(rentaCollectionRenta);
             }
             em.remove(propiedad);
             utx.commit();
@@ -216,7 +137,7 @@ public class PropiedadJpaController implements Serializable {
             em.close();
         }
     }
-    
+    /*------------------------------------------ CONSULTAS DE PROPIEDAD --------------------------------------*/
     public List<Propiedad> getPropiedades()
     {
         EntityManager em = getEntityManager();
@@ -237,5 +158,28 @@ public class PropiedadJpaController implements Serializable {
         List<Propiedad> list = query.getResultList();
         return list;
     }
-    
+    /*------------------------------------------ CONSULTAS DE RENTA --------------------------------------*/
+    public void agregarRenta(Renta renta){
+        
+        EntityManager em = getEntityManager();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date today = new Date();
+        String fechaHoy = dateFormat.format(today.getTime());
+        //Query query = em.createQuery("INSERT INTO RENTA"
+	//			+ "(CEDULA_USUARIO, ID_PROPIEDAD, EMAIL,PRECIO_RENTA,FECHA, ESTADO,FECHA_RENTA) " + "VALUES"
+	//			+ "(1,'mkyong','system', " + "to_date('"
+	//			+ getCurrentTimeStamp() + "', 'yyyy/mm/dd hh24:mi:ss'))");
+        
+    //INSERT INTO renta (cedula_usuario, id_propiedad, email, precio_renta, fecha, estado,fecha_renta) 
+    //VALUES (2345, 2, 'ASHGG', 4000, TO_DATE('2019/05/24 00:02:44', 'yyyy/mm/dd hh24:mi:ss'), 0,TO_DATE('2019/05/24 00:02:44', 'yyyy/mm/dd hh24:mi:ss'));
+        String consulta = "INSERT INTO RENTA"
+				+ "(CEDULA_USUARIO, ID_PROPIEDAD, EMAIL,PRECIO_RENTA,FECHA, ESTADO,FECHA_RENTA) " + "VALUES"
+				+ "( "+renta.getCedulaUsuario()+",2,'"+renta.getEmail()+"',"+renta.getPrecioRenta()+","+"to_date('"+ fechaHoy + "', 'yyyy/mm/dd hh24:mi:ss'),"+renta.getEstado()+","+"to_date('"+ fechaHoy + "', 'yyyy/mm/dd hh24:mi:ss')"+")";
+//        Query query = em.createQuery("INSERT INTO RENTA"
+//				+ "(CEDULA_USUARIO, ID_PROPIEDAD, EMAIL,PRECIO_RENTA,FECHA, ESTADO,FECHA_RENTA) " + "VALUES"
+//				+ "( "+renta.getCedulaUsuario()+",2,'"+renta.getEmail()+"',"+renta.getPrecioRenta()+","+"to_date('"+ fechaHoy + "', 'yyyy/mm/dd hh24:mi:ss'),"+renta.getEstado()+","+"to_date('"+ fechaHoy + "', 'yyyy/mm/dd hh24:mi:ss')"+")");
+        
+        System.out.println("Esta es la consulta ---> "+consulta);
+  //      query.getSingleResult();
+    }
 }

@@ -7,8 +7,10 @@ package service;
 
 import Negocio.PropiedadFacade;
 import entities.Propiedad;
+import entities.TransaccionDTO;
 import java.math.BigDecimal;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,13 +30,13 @@ import javax.ws.rs.Produces;
 @Stateless
 @Path("entities.propiedad")
 public class PropiedadFacadeREST {
-
-    PropiedadFacade p = new PropiedadFacade();
+    @EJB
+    PropiedadFacade propFacade ;
 
     @POST
     @Consumes({"application/json"})
     public void create(Propiedad entity) {
-
+        propFacade.crearPropiedad(entity);
     }
 
     @PUT
@@ -53,20 +55,20 @@ public class PropiedadFacadeREST {
     @Path("{id}")
     @Produces({"application/json"})
     public Propiedad find(@PathParam("id") Short id) {
-        return p.getPropiedad(id);
+        return propFacade.getPropiedad(id);
     }
     
     @GET
     @Produces({"application/json"})
     public List<Propiedad> obtenerPropiedades(){
-        return p.getPropiedades();
+        return propFacade.getPropiedades();
     }
 
     @GET
     @Path("nombre/{nombre}")
     @Produces({"application/json"})
     public List<Propiedad> obtenerPropiedadesxNombre(@PathParam("nombre") String nombre) {
-        return p.getPropiedadesxNombre(nombre);
+        return propFacade.getPropiedadesxNombre(nombre);
     }
 
     @GET
@@ -74,7 +76,7 @@ public class PropiedadFacadeREST {
     @Produces({"application/json"})
     public List<Propiedad> obtenerPropiedadesxCedula(@PathParam("cedula") BigDecimal cedula) {
 
-        return p.getPropiedadesxCedula(cedula);
+        return propFacade.getPropiedadesxCedula(cedula);
     }
 
     @GET
