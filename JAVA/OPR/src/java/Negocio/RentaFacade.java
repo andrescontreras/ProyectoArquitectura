@@ -30,8 +30,8 @@ public class RentaFacade extends AbstractFacade<Renta> {
     
     public void crearRenta(Renta renta){
         getEntityManager().persist(renta);
-        
-        
+        FacadeInteroperabilidadOPR interoperbilidad = new FacadeInteroperabilidadOPR();
+        interoperbilidad.InformarSistemaERP(renta);
     }
     
 }
