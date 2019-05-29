@@ -44,7 +44,7 @@ public class AgregarProductoMB {
         System.out.println(propiedad.toString());
         try (CloseableHttpClient httpClient = HttpClientBuilder.create().build()) {
             Gson gson = new Gson();
-            HttpPost request = new HttpPost("http://localhost:8080/OPR/webresources/entities.propiedad/");
+            HttpPost request = new HttpPost("http://localhost:8080/OPR/webresources/propiedad/");
             StringEntity postingString = new StringEntity(gson.toJson(propiedad));
             request.setEntity(postingString);
             request.setHeader("Content-type","application/json");
