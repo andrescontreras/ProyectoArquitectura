@@ -1,0 +1,92 @@
+﻿@model IEnumerable<PresentacionREST_JAVA.Models.PropiedadDTO>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Propiedades</h2>
+@using (Html.BeginForm("Index", "Propiedades","Create" ))
+{
+<b>
+	Buscar por: @Html.RadioButton("buscarPor", "nombre")Nombre
+	@Html.RadioButton("buscarPor", "cedula")Cedula
+</b>
+	@Html.TextBox("buscar")<input type="submit" value="buscar">
+}
+
+	<table class="table">
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.nombreOwner)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.cedulaOwner)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.nombre)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.descripcion)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.tipoCedula)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.tipo)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.direccion)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.localidad)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.numCuartos)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.precio)
+			</th>
+			<th></th>
+		</tr>
+
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.nombreOwner)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.cedulaOwner)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.nombre)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.descripcion)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.tipoCedula)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.tipo)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.direccion)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.localidad)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.numCuartos)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.precio)
+				</td>
+				<td>
+					@Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+					@Html.ActionLink("Details", "Details", new { id = item.id })
+				</td>
+			</tr>
+		}
+
+	</table>

@@ -6,20 +6,16 @@
 package entities;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -46,44 +42,59 @@ public class Propiedad implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID", insertable = false )
+    @Column(name = "ID", insertable=false)
     private Short id;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 50)
     @Column(name = "NOMBRE_OWNER")
     private String nombreOwner;
     @Basic(optional = false)
+    @NotNull
     @Column(name = "CEDULA_OWNER")
     private long cedulaOwner;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 30)
     @Column(name = "NOMBRE")
     private String nombre;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 50)
     @Column(name = "DESCRIPCION")
     private String descripcion;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 15)
     @Column(name = "TIPO_CEDULA")
     private String tipoCedula;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 20)
     @Column(name = "TIPO")
     private String tipo;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 70)
     @Column(name = "DIRECCION")
     private String direccion;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 20)
     @Column(name = "LOCALIDAD")
     private String localidad;
     @Basic(optional = false)
+    @NotNull
     @Column(name = "NUM_CUARTOS")
     private short numCuartos;
     @Basic(optional = false)
+    @NotNull
     @Column(name = "PRECIO")
     private int precio;
     @Basic(optional = false)
+    @NotNull
     @Column(name = "RENTADA")
     private Character rentada;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPropiedad")
-    private Collection<Renta> rentaCollection;
 
     public Propiedad() {
     }
@@ -201,15 +212,6 @@ public class Propiedad implements Serializable {
 
     public void setRentada(Character rentada) {
         this.rentada = rentada;
-    }
-
-    @XmlTransient
-    public Collection<Renta> getRentaCollection() {
-        return rentaCollection;
-    }
-
-    public void setRentaCollection(Collection<Renta> rentaCollection) {
-        this.rentaCollection = rentaCollection;
     }
 
     @Override

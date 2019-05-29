@@ -9,24 +9,25 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using LogicaFinanciera;
+using LogicaFinanciera.Negocio;
 
 namespace REST_Financiera.Controllers
 {
     public class MovimientosController : ApiController
     {
-        private FinancieraEntities db = new FinancieraEntities();
+		private FacadeMovimientos fm = new FacadeMovimientos();
 
-        // GET: api/Movimientos
-        public IQueryable<Movimiento> GetMovimiento()
+		// GET: api/Movimientos
+		public List<Movimiento> GetMovimiento()
         {
-            return db.Movimiento;
-        }
+			return fm.GetMovimientos();
+		}
 
         // GET: api/Movimientos/5
         [ResponseType(typeof(Movimiento))]
-        public IHttpActionResult GetMovimiento(decimal id)
+        public IHttpActionResult GetMovimiento(int id)
         {
-            Movimiento movimiento = db.Movimiento.Find(id);
+            Movimiento movimiento = fm.GetMovimiento(id);
             if (movimiento == null)
             {
                 return NotFound();
@@ -37,37 +38,21 @@ namespace REST_Financiera.Controllers
 
         // PUT: api/Movimientos/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutMovimiento(decimal id, Movimiento movimiento)
+        public IHttpActionResult PutMovimiento(Movimiento movimiento)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != movimiento.id_movimiento)
-            {
-                return BadRequest();
-            }
+			Movimiento rmovimiento = fm.EditMovimiento(movimiento);
 
-            db.Entry(movimiento).State = EntityState.Modified;
+			if (rmovimiento == null)
+			{
+				return NotFound();
+			}
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!MovimientoExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
+			return Ok(rmovimiento);
         }
 
         // POST: api/Movimientos
@@ -79,40 +64,27 @@ namespace REST_Financiera.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Movimiento.Add(movimiento);
-            db.SaveChanges();
+			Movimiento rmovimiento = fm.AddMovimiento(movimiento);
 
-            return CreatedAtRoute("DefaultApi", new { id = movimiento.id_movimiento }, movimiento);
-        }
+			if (rmovimiento == null)
+			{
+				return NotFound();
+			}
+
+			return Ok(rmovimiento);
+		}
 
         // DELETE: api/Movimientos/5
         [ResponseType(typeof(Movimiento))]
-        public IHttpActionResult DeleteMovimiento(decimal id)
+        public IHttpActionResult DeleteMovimiento(int id)
         {
-            Movimiento movimiento = db.Movimiento.Find(id);
-            if (movimiento == null)
-            {
-                return NotFound();
-            }
+			Movimiento rmovimiento = fm.DeleteMovimiento(id);
+			if (rmovimiento == null)
+			{
+				return NotFound();
+			}
 
-            db.Movimiento.Remove(movimiento);
-            db.SaveChanges();
-
-            return Ok(movimiento);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private bool MovimientoExists(decimal id)
-        {
-            return db.Movimiento.Count(e => e.id_movimiento == id) > 0;
-        }
+			return Ok(rmovimiento);
+		}
     }
 }

@@ -9,43 +9,32 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using LogicaFinanciera;
+using LogicaFinanciera.Negocio;
 
 namespace REST_Financiera.Controllers
 {
     public class UsuariosController : ApiController
     {
-        private FinancieraEntities db = new FinancieraEntities();
+		private FacadeUsuarios fu = new FacadeUsuarios();
 
         // GET: api/Usuarios
         public List<Usuario> GetUsuario()
         {
-			List<Usuario> usuarios = new List<Usuario>();
-			foreach (var item in db.Usuario)
-			{
-				Usuario u = new Usuario();
-				u.id_usuario = item.id_usuario;
-				u.nombre = item.nombre;
-				u.numero_documento = item.numero_documento;
-				u.password = item.password;
-				u.saldo = item.saldo;
-				u.tipo_documento = item.tipo_documento;
-				usuarios.Add(u);
-			}
-            return usuarios;
+			return fu.GetUsuarios();
         }
 
         // GET: api/Usuarios/5
         [ResponseType(typeof(Usuario))]
-        public IHttpActionResult GetUsuario(decimal id)
+        public IHttpActionResult GetUsuario(int id)
         {
-            Usuario usuario = db.Usuario.Find(id);
-            if (usuario == null)
-            {
-                return NotFound();
-            }
+			Usuario usuario =  fu.GetUsuario(id);
+			if (usuario == null)
+			{
+				return NotFound();
+			}
 
-            return Ok(usuario);
-        }
+			return Ok(usuario);
+		}
 
         // PUT: api/Usuarios/5
         [ResponseType(typeof(void))]
@@ -56,25 +45,15 @@ namespace REST_Financiera.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Entry(usuario).State = EntityState.Modified;
+			Usuario rusuario = fu.EditUsuario(usuario);
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UsuarioExists(usuario.id_usuario))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+			if (rusuario == null)
+			{
+				return NotFound();
+			}
 
-            return StatusCode(HttpStatusCode.NoContent);
+			return Ok(rusuario);
+
         }
 
         // POST: api/Usuarios
@@ -86,40 +65,27 @@ namespace REST_Financiera.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Usuario.Add(usuario);
-            db.SaveChanges();
+			Usuario rusuario = fu.AddUsuario(usuario);
 
-            return CreatedAtRoute("DefaultApi", new { id = usuario.id_usuario }, usuario);
-        }
+			if (usuario == null)
+			{
+				return NotFound();
+			}
+
+			return Ok(usuario);
+		}
 
         // DELETE: api/Usuarios/5
         [ResponseType(typeof(Usuario))]
-        public IHttpActionResult DeleteUsuario(decimal id)
+        public IHttpActionResult DeleteUsuario(int id)
         {
-            Usuario usuario = db.Usuario.Find(id);
-            if (usuario == null)
-            {
-                return NotFound();
-            }
 
-            db.Usuario.Remove(usuario);
-            db.SaveChanges();
-
-            return Ok(usuario);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private bool UsuarioExists(decimal id)
-        {
-            return db.Usuario.Count(e => e.id_usuario == id) > 0;
+			Usuario usuario = fu.DeleteUsuario(id);
+			if (usuario == null)
+			{
+				return NotFound();
+			}
+			return Ok(usuario);
         }
     }
 }

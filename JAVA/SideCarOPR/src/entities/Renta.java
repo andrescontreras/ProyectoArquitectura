@@ -11,13 +11,13 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -34,32 +34,42 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Renta.findByEmail", query = "SELECT r FROM Renta r WHERE r.email = :email"),
     @NamedQuery(name = "Renta.findByPrecioRenta", query = "SELECT r FROM Renta r WHERE r.precioRenta = :precioRenta"),
     @NamedQuery(name = "Renta.findByFecha", query = "SELECT r FROM Renta r WHERE r.fecha = :fecha"),
-    @NamedQuery(name = "Renta.findByEstado", query = "SELECT r FROM Renta r WHERE r.estado = :estado")})
+    @NamedQuery(name = "Renta.findByEstado", query = "SELECT r FROM Renta r WHERE r.estado = :estado"),
+    @NamedQuery(name = "Renta.findByFechaRenta", query = "SELECT r FROM Renta r WHERE r.fechaRenta = :fechaRenta")})
 public class Renta implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "ID")
+    @Column(name = "ID", insertable=false)
     private Short id;
     @Basic(optional = false)
+    @NotNull
     @Column(name = "CEDULA_USUARIO")
     private long cedulaUsuario;
+    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
+    @NotNull
+    @Column(name = "ID_PROPIEDAD")
+    private Short idPropiedad;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 60)
     @Column(name = "EMAIL")
     private String email;
     @Basic(optional = false)
+    @NotNull
     @Column(name = "PRECIO_RENTA")
     private long precioRenta;
-    @Basic(optional = false)
     @Column(name = "FECHA")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date fecha;
     @Basic(optional = false)
+    @NotNull
     @Column(name = "ESTADO")
     private Character estado;
-    @JoinColumn(name = "ID_PROPIEDAD", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
-    private Propiedad idPropiedad;
+    @Column(name = "FECHA_RENTA")
+    @Temporal(TemporalType.DATE)
+    private Date fechaRenta;
 
     public Renta() {
     }
@@ -68,12 +78,11 @@ public class Renta implements Serializable {
         this.id = id;
     }
 
-    public Renta(Short id, long cedulaUsuario, String email, long precioRenta, Date fecha, Character estado) {
+    public Renta(Short id, long cedulaUsuario, String email, long precioRenta, Character estado) {
         this.id = id;
         this.cedulaUsuario = cedulaUsuario;
         this.email = email;
         this.precioRenta = precioRenta;
-        this.fecha = fecha;
         this.estado = estado;
     }
 
@@ -93,6 +102,14 @@ public class Renta implements Serializable {
         this.cedulaUsuario = cedulaUsuario;
     }
 
+    public Short getIdPropiedad() {
+        return idPropiedad;
+    }
+
+    public void setIdPropiedad(Short idPropiedad) {
+        this.idPropiedad = idPropiedad;
+    }
+    
     public String getEmail() {
         return email;
     }
@@ -125,12 +142,12 @@ public class Renta implements Serializable {
         this.estado = estado;
     }
 
-    public Propiedad getIdPropiedad() {
-        return idPropiedad;
+    public Date getFechaRenta() {
+        return fechaRenta;
     }
 
-    public void setIdPropiedad(Propiedad idPropiedad) {
-        this.idPropiedad = idPropiedad;
+    public void setFechaRenta(Date fechaRenta) {
+        this.fechaRenta = fechaRenta;
     }
 
     @Override

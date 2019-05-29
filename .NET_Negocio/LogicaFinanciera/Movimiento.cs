@@ -15,7 +15,7 @@ namespace LogicaFinanciera
     public partial class Movimiento
     {
         public int id_movimiento { get; set; }
-        public Nullable<decimal> num_aprovacion { get; set; }
+        public Nullable<int> num_aprovacion { get; set; }
         public int valor { get; set; }
         public System.DateTime fecha { get; set; }
         public bool estado { get; set; }
