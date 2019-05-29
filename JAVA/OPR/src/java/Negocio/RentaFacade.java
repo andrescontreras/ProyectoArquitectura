@@ -31,6 +31,7 @@ public class RentaFacade extends AbstractFacade<Renta> {
     public void crearRenta(Renta renta){
         getEntityManager().persist(renta);
         
+        
     }
     
 }

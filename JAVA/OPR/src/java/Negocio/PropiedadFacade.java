@@ -5,7 +5,7 @@
  */
 package Negocio;
 
-import Integracion.PropiedadJpaController;
+import Integracion.IntegracionBD;
 import entities.Propiedad;
 import java.math.BigDecimal;
 import java.util.List;
@@ -31,22 +31,23 @@ public class PropiedadFacade extends AbstractFacade<Propiedad>{
     public PropiedadFacade() {
         super(Propiedad.class);
     }
-    PropiedadJpaController jpa = new PropiedadJpaController();
+    
+    IntegracionBD bd  = new IntegracionBD();
     
     public void crearPropiedad(Propiedad propiedad){
-        getEntityManager().persist(propiedad);
+        bd.crearPropiedad(em, propiedad);
     }
     public Propiedad getPropiedad(Short id){
-        return jpa.findPropiedad(id);
+        return bd.findPropiedad(em, id);
     }
     public List<Propiedad> getPropiedades(){
-        return jpa.getPropiedades();
+        return bd.getPropiedades(em);
     }
     public List<Propiedad> getPropiedadesxNombre(String nombre){
-        return jpa.getPropiedadesxNombre(nombre);
+        return bd.getPropiedadesxNombre(em, nombre);
     }
     public List<Propiedad> getPropiedadesxCedula(BigDecimal cedula){
-        return jpa.getPropiedadesxCedula(cedula);
+        return bd.getPropiedadesxCedula(em,cedula);
     }
     
 }

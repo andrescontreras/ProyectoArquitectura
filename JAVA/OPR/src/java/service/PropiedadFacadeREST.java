@@ -28,7 +28,7 @@ import javax.ws.rs.Produces;
  * @author andre
  */
 @Stateless
-@Path("entities.propiedad")
+@Path("propiedad")
 public class PropiedadFacadeREST {
     @EJB
     PropiedadFacade propFacade ;
