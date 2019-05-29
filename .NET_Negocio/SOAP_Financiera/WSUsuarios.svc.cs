@@ -1,4 +1,5 @@
 ﻿using LogicaFinanciera;
+using LogicaFinanciera.Negocio;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -13,84 +14,60 @@ namespace SOAP_Financiera
 	// NOTE: In order to launch WCF Test Client for testing this service, please select WSUsuarios.svc or WSUsuarios.svc.cs at the Solution Explorer and start debugging.
 	public class WSUsuarios : IWSUsuarios
 	{
-		private FinancieraEntities db = new FinancieraEntities();
+		private FacadeUsuarios fu = new FacadeUsuarios();
 		public List<Usuario> DoWork()
 		{
-			var a = db.Usuario.ToList();
-
-			return a;
+			return null;
 		}
 		public List<Usuario> GetAllUsuario()
 		{
-			var dbUsuarios = db.Usuario.ToList();
-			List<Usuario> usuarios = new List<Usuario>();
-			foreach (var item in dbUsuarios)
-			{
-				Usuario u = new Usuario();
-				u.id_usuario = item.id_usuario;
-				u.nombre = item.nombre;
-				u.numero_documento = item.numero_documento;
-				u.password = item.password;
-				u.saldo = item.saldo;
-				usuarios.Add(u);
-			}
-			return usuarios;
+			return fu.GetUsuarios();
 		}
 
 
 
 		public Usuario GetAllUsuarioById(int id)
 		{
-
-			var usuarios = from k in db.Usuario where k.id_usuario == id select k;
-			Usuario usuario = new Usuario();
-			foreach (var item in usuarios)
+			Usuario usuario = fu.GetUsuario(id);
+			if (usuario == null)
 			{
-
-				usuario.id_usuario = item.id_usuario;
-				usuario.nombre = item.nombre;
-				usuario.numero_documento = item.numero_documento;
-				usuario.password = item.password;
-				usuario.saldo = item.saldo;
+				return null;
 			}
 
 			return usuario;
 		}
 
-		public int DeleteUsuarioById(int Id)
+		public int DeleteUsuarioById(int id)
 		{
 
-			Usuario usuario = new Usuario();
-			usuario.id_usuario = Id;
-			db.Entry(usuario).State = EntityState.Deleted;
-			int Retval = db.SaveChanges();
-			return Retval;
+			Usuario usuario = fu.DeleteUsuario(id);
+			if (usuario == null)
+			{
+				return 0;
+			}
+
+			return usuario.id_usuario;
 		}
 
 		public int AddUsuario(Usuario item)
 		{
-			Usuario usuario = new Usuario();
-			usuario.id_usuario = item.id_usuario;
-			usuario.nombre = item.nombre;
-			usuario.numero_documento = item.numero_documento;
-			usuario.password = item.password;
-			usuario.saldo = item.saldo;
-			db.Usuario.Add(usuario);
-			int Retval = db.SaveChanges();
-			return Retval;
+			Usuario rusuario = fu.AddUsuario(item);
+
+			if (rusuario == null)
+			{
+				return 0;
+			}
+
+			return rusuario.id_usuario;
 		}
 		public int UpdateUsuario(Usuario item)
 		{
-			Usuario usuario = new Usuario();
-			usuario.id_usuario = item.id_usuario;
-			usuario.nombre = item.nombre;
-			usuario.numero_documento = item.numero_documento;
-			usuario.password = item.password;
-			usuario.saldo = item.saldo;
-			db.Entry(usuario).State = EntityState.Modified;
-
-			int Retval = db.SaveChanges();
-			return Retval;
+			Usuario rusuario = fu.EditUsuario(item);
+			if (rusuario == null)
+			{
+				return 0;
+			}
+			return rusuario.id_usuario;
 		}
 
 	}

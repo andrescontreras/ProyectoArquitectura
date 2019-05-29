@@ -1,0 +1,67 @@
+﻿@model PresentacionREST.Models.UsuarioDTO
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>UsuarioDTO</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.id_usuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.id_usuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tipo_documento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipo_documento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.numero_documento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.numero_documento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.saldo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.saldo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+	@Html.ActionLink("Edit", "Edit", new { id = Model.id_usuario }) |
+	@Html.ActionLink("Details", "Details", new { id = Model.id_usuario }) |
+	@Html.ActionLink("Back to List", "Index")
+</p>

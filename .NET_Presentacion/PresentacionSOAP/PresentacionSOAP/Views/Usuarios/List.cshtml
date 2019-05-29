@@ -1,0 +1,63 @@
+﻿@model IEnumerable<PresentacionSOAP.ProxyUsuarios.Usuario>
+
+@{
+    ViewBag.Title = "ViewUsuario";
+}
+
+<h2>ViewUsuario</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.id_usuario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.numero_documento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.password)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.saldo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tipo_documento)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.id_usuario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.numero_documento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.password)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.saldo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tipo_documento)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id_usuario }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id_usuario }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id_usuario })
+        </td>
+    </tr>
+}
+
+</table>
