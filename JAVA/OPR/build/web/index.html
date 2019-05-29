@@ -1,16 +1,45 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <f:view>
+            <h:form>
+                <h1><h:outputText value="Create/Edit"/></h1>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Nombre_owner:" for="nombre_owner" />
+                    <h:inputText id="nombre_owner" value="#{agregarProductoMB.propiedad.nombre_owner}" title="Nombre_owner" required="true"/>
+                    <h:outputLabel value="Cedula_owner:" for="cedula_owner" />
+                    <h:inputText id="cedula_owner" value="#{agregarProductoMB.propiedad.cedula_owner}" title="Cedula_owner" required="true"/>
+                    <h:outputLabel value="Nombre:" for="nombre" />
+                    <h:inputText id="nombre" value="#{agregarProductoMB.propiedad.nombre}" title="Nombre" required="true"/>
+                    <h:outputLabel value="Descripcion:" for="descripcion" />
+                    <h:inputText id="descripcion" value="#{agregarProductoMB.propiedad.descripcion}" title="Descripcion" required="true"/>
+                    <h:outputLabel value="Tipo_cedula:" for="tipo_cedula" />
+                    <h:inputText id="tipo_cedula" value="#{agregarProductoMB.propiedad.tipo_cedula}" title="Tipo_cedula" required="true"/>
+                    <h:outputLabel value="Tipo:" for="tipo" />
+                    <h:inputText id="tipo" value="#{agregarProductoMB.propiedad.tipo}" title="Tipo" />
+                    <h:outputLabel value="Direccion:" for="direccion" />
+                    <h:inputText id="direccion" value="#{agregarProductoMB.propiedad.direccion}" title="Direccion" required="true"/>
+                    <h:outputLabel value="Localidad:" for="localidad" />
+                    <h:inputText id="localidad" value="#{agregarProductoMB.propiedad.localidad}" title="Localidad" required="true"/>
+                    <h:outputLabel value="Num_cuartos:" for="num_cuartos" />
+                    <h:inputText id="num_cuartos" value="#{agregarProductoMB.propiedad.num_cuartos}" title="Num_cuartos" required="true"/>
+                    <h:outputLabel value="Precio:" for="precio" />
+                    <h:inputText id="precio" value="#{agregarProductoMB.propiedad.precio}" title="Precio" required="true"/>
+                    <h:outputLabel value="Rentada:" for="rentada" />
+                    <h:inputText id="rentada" value="#{agregarProductoMB.propiedad.rentada}" title="Rentada" required="true"/>
+                    
+                    <h:commandButton value ="Enviar" action="#{agregarProductoMB.guardar()}"/>
+                </h:panelGrid>
+            </h:form>
+            
+        </f:view>
+
+    </h:body>
 </html>
+
