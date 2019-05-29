@@ -55,4 +55,8 @@ public class IntegracionBD {
      public void crearRenta(EntityManager em,Renta renta){
         em.persist(renta);
      }
+     public List<Renta> getRentas(EntityManager em){
+         Query query = em.createQuery("Select e from Renta e");
+        return (List<Renta>)query.getResultList();
+     }
 }

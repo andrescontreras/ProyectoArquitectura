@@ -6,6 +6,7 @@
 package Integracion;
 
 import com.google.gson.Gson;
+import entities.AprobacionDTO;
 import entities.TransaccionDTO;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,8 +22,8 @@ import org.apache.http.util.EntityUtils;
  *
  * @author imroo
  */
-public class proxyFinanciera {
-    public static void httpPost (TransaccionDTO t)
+public class ProxyFinanciera {
+    public void httpPost (TransaccionDTO t)
     {
         try (CloseableHttpClient httpClient = HttpClientBuilder.create().build()) {
             Gson gson = new Gson();
@@ -42,9 +43,10 @@ public class proxyFinanciera {
         catch (IOException ex) {
         }
     }
-    public static ArrayList<TransaccionDTO> httpGet() {
+    public AprobacionDTO httpGet() {
 
-    ArrayList<TransaccionDTO> dataFromService = new ArrayList<TransaccionDTO>();
+    ArrayList<AprobacionDTO> dataFromService = new ArrayList<AprobacionDTO>();
+    AprobacionDTO response = new AprobacionDTO();
     try (CloseableHttpClient httpClient = HttpClientBuilder.create().build()) {
         HttpGet request = new HttpGet("URL GOES HERE");   
         request.addHeader("content-type", "application/json");
@@ -52,17 +54,18 @@ public class proxyFinanciera {
         String json = EntityUtils.toString(result.getEntity(), "UTF-8");  
 
         com.google.gson.Gson gson = new com.google.gson.Gson();                       
-        TransaccionDTO[] response = gson.fromJson(json, TransaccionDTO[].class);
+        response = gson.fromJson(json, AprobacionDTO.class);
 
-        System.out.println(response.length);   
+        //System.out.println(response.length); 
+        /*
         for(TransaccionDTO transaccion : response)
         {
             dataFromService.add(transaccion);
              System.out.println(transaccion.toString());
         }
-
+        */
     } catch (IOException ex) {
     }
-    return dataFromService;
+    return response;
 }
 }
