@@ -6,13 +6,12 @@
 package negocio;
 
 import entities.RentaErp;
-import integracion.RentaErpJpaController;
-import integracion.exceptions.RollbackFailureException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
 import javax.jms.Connection;
@@ -32,22 +31,14 @@ import javax.persistence.Persistence;
 @Stateless
 @LocalBean
 public class FacadeInteroperabilidadERP {
-
+   @EJB
+   RentaErpFacade erpF;
     public void persist(RentaErp r){
-   
-      
-        try {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("SideCarERPPU");
-            RentaErpJpaController control= new RentaErpJpaController(emf);
-            RentaErp renta = r;
-            control.create(renta);
-        } catch (RollbackFailureException ex) {
-            Logger.getLogger(FacadeInteroperabilidadERP.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            Logger.getLogger(FacadeInteroperabilidadERP.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-       
+        System.out.println("llega a funcion persist");
+        RentaErp renta = r;
+        System.out.println("declaracion renta");
+       // erpF = new RentaErpFacade();
+        erpF.crearRentaERP(renta); 
     }
     
 }

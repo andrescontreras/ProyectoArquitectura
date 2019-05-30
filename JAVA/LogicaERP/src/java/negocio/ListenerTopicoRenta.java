@@ -8,8 +8,10 @@ package negocio;
 import entities.RentaErp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.StringTokenizer;
 import javax.ejb.ActivationConfigProperty;
+import javax.ejb.EJB;
 import javax.ejb.MessageDriven;
 import javax.jms.JMSException;
 import javax.jms.Message;
@@ -26,6 +28,8 @@ import javax.jms.TextMessage;
     @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Topic"),})
 public class ListenerTopicoRenta implements MessageListener {
 
+    @EJB
+    RentaErpFacade erpF;
     public ListenerTopicoRenta() {
 
     }
@@ -39,20 +43,22 @@ public class ListenerTopicoRenta implements MessageListener {
                 msg = (TextMessage) message;
                 
                 String strDatos = msg.getText();
-                System.err.println(strDatos);
+                System.out.println(strDatos + "LLEGARON LOS DATOS" );
                 StringTokenizer tokens = new StringTokenizer(strDatos, ",");
             //  Short id = Short.parseShort(tokens.nextToken());
                 long cedulaUsuario = Long.parseLong(tokens.nextToken());
                 String email = tokens.nextToken();
                 short idPropiedad = Short.parseShort(tokens.nextToken());
                 long precioRenta = Long.parseLong(tokens.nextToken());
-                Date fecha = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").parse(tokens.nextToken());
+                Date fecha = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.US).parse(tokens.nextToken());
                 Character estado = tokens.nextToken().charAt(0);
-                Date fecha2 = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").parse(tokens.nextToken());
-                RentaErp r = new RentaErp(cedulaUsuario,idPropiedad,email,precioRenta,fecha,estado,fecha2);
-                FacadeInteroperabilidadERP f = new FacadeInteroperabilidadERP();
-                f.persist(r);
-                //    System.out.println("Recibido asincrono [" + msg.getText() + "]");
+                Date fecha2 = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.US).parse(tokens.nextToken());
+                RentaErp r = new RentaErp(cedulaUsuario,idPropiedad,email,precioRenta,fecha,estado,fecha2);  
+           //     FacadeInteroperabilidadERP f = new FacadeInteroperabilidadERP();
+           //     f.persist(r);
+                erpF.crearRentaERP(r); 
+                
+                System.out.println("esta en null");
             } else {
                 //   System.err.println("El mensaje no es de tipo texto");
             }

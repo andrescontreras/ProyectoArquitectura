@@ -7,6 +7,9 @@ package Integracion;
 
 import entities.Renta;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.annotation.Resource;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.NoneScoped;
@@ -61,12 +64,13 @@ public class IntegradorTopicoRenta implements Serializable {
             Topic topic = (Topic) ctx.lookup("jms/Topic");
             MessageProducer publisher = topicSession.createProducer(topic);
          // TopicSender sender = topicSession.createSender(topic);
-            String mensaje ="94"+","+String.valueOf(renta.getCedulaUsuario())+","+ renta.getEmail()+","+String.valueOf(renta.getIdPropiedad())+","+String.valueOf(renta.getPrecioRenta())+","+renta.getFecha().toString() +","+renta.getEstado()+","+renta.getFechaRenta().toString();
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            Date date = new Date();
+            String mensaje =String.valueOf(renta.getCedulaUsuario())+","+ renta.getEmail()+","+String.valueOf(renta.getIdPropiedad())+","+String.valueOf(renta.getPrecioRenta())+","+renta.getFecha().toString() +","+renta.getEstado()+","+renta.getFechaRenta().toString();
             Message msg = topicSession.createTextMessage(mensaje);
             msg.setBooleanProperty("ACK_DEBUG", true);
             msg.setFloatProperty("ACK_BALANCE", 24234.44f);
             publisher.send(msg);
-
             System.out.println("sent the message");
         } finally {
             // close the queue connection
