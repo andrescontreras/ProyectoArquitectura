@@ -6,6 +6,7 @@
 package service;
 
 import Negocio.RentaFacade;
+import entities.ConfirmacionDTO;
 import entities.Renta;
 import java.util.List;
 import javax.ejb.EJB;
@@ -43,6 +44,13 @@ public class RentaFacadeREST extends AbstractFacade<Renta> {
     public void create(Renta entity) {
         //super.create(entity); 
         rentaF.crearRenta(entity);
+    }
+    
+    @POST
+    @Consumes({"application/json"})
+    @Path("confirmar")
+    public String confirmar(ConfirmacionDTO confirmacion) {   
+        return rentaF.confirmarContrato(confirmacion.getIdPropiedad(), confirmacion.getDocumentoUsuario() );
     }
 
     @PUT
@@ -90,5 +98,7 @@ public class RentaFacadeREST extends AbstractFacade<Renta> {
     protected EntityManager getEntityManager() {
         return em;
     }
+    
+    
     
 }

@@ -42,4 +42,8 @@ public class RentaFacade extends AbstractFacade<Renta> {
             bd.revisarContratos(em);
         }
     }
+
+    public String confirmarContrato(int idPropiedad, int documentoUsuario) {
+        return bd.confirmarContrato(idPropiedad, documentoUsuario, em);
+    }
 }
