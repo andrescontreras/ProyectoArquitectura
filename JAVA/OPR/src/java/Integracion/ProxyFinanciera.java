@@ -27,7 +27,7 @@ public class ProxyFinanciera {
     {
         try (CloseableHttpClient httpClient = HttpClientBuilder.create().build()) {
             Gson gson = new Gson();
-            HttpPost request = new HttpPost("URL GOES HERE");
+            HttpPost request = new HttpPost("http://srvcronos.tk:8081/api/Transacciones");
             StringEntity postingString = new StringEntity(gson.toJson(t));
             request.setEntity(postingString);
             request.setHeader("Content-type","application/json");
@@ -48,7 +48,7 @@ public class ProxyFinanciera {
     ArrayList<AprobacionDTO> dataFromService = new ArrayList<AprobacionDTO>();
     AprobacionDTO response = new AprobacionDTO();
     try (CloseableHttpClient httpClient = HttpClientBuilder.create().build()) {
-        HttpGet request = new HttpGet("URL GOES HERE");   
+        HttpGet request = new HttpGet("http://srvcronos.tk:8081/api/Transacciones");   
         request.addHeader("content-type", "application/json");
         HttpResponse result = httpClient.execute(request);
         String json = EntityUtils.toString(result.getEntity(), "UTF-8");  
