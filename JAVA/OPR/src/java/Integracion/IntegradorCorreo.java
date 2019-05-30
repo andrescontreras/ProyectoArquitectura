@@ -25,8 +25,11 @@ import javax.mail.internet.MimeMessage;
 @Stateless
 public class IntegradorCorreo {
 
-    public void enviarCorreo(String fromEmail, String username, String password, String toEmail, String subject, String message) {
+    public void enviarCorreo(String toEmail, String subject, String message) {
 
+        String fromEmail = "prowebphp@gmail.com";
+        String username = "prowebphp@gmail.com";
+        String password = "php12345";
         Properties prop = new Properties();
         prop.put("mail.smtp.host", "smtp.gmail.com");
         prop.put("mail.smtp.port", "465");
