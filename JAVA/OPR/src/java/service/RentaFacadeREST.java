@@ -7,6 +7,7 @@ package service;
 
 import Negocio.RentaFacade;
 import entities.AprobacionDTO;
+import entities.ConfirmacionDTO;
 import entities.Renta;
 import entities.TransaccionDTO;
 import java.util.List;
@@ -42,11 +43,20 @@ public class RentaFacadeREST {
         //super.create(entity); 
         return rentaF.crearRenta(entity);
     }
+    
+    @POST
+    @Consumes({"application/json"})
+    @Path("confirmar")
+    public String confirmar(ConfirmacionDTO confirmacion) {   
+        return rentaF.confirmarContrato(confirmacion.getIdPropiedad(), confirmacion.getDocumentoUsuario() );
+    }
 
     @GET
     @Produces({"application/json"})
     public List<Renta> findAll() {
         return rentaF.mostrarRentas();
     }
+    
+    
     
 }

@@ -79,4 +79,17 @@ public class RentaFacade extends AbstractFacade<Renta> {
     public List<Renta> mostrarRentas() {
         return bd.getRentas(em);
     }
+    public void revisarContratos(){
+        
+        if(em==null)
+        {
+            System.err.println("null :(");
+        }else{
+            bd.revisarContratos(em);
+        }
+    }
+
+    public String confirmarContrato(int idPropiedad, int documentoUsuario) {
+        return bd.confirmarContrato(idPropiedad, documentoUsuario, em);
+    }
 }
