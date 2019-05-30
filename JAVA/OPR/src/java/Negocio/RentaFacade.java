@@ -12,9 +12,26 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author andre
+ * @author santi
  */
 @Stateless
-public class RentaFacade {
-     
+public class RentaFacade extends AbstractFacade<Renta> {
+    @PersistenceContext(unitName = "LogicaOPRPU")
+    private EntityManager em;
+
+    @Override
+    protected EntityManager getEntityManager() {
+        return em;
+    }
+
+    public RentaFacade() {
+        super(Renta.class);
+    }
+    
+    public void crearRenta(Renta renta){
+        getEntityManager().persist(renta);
+        
+        
+    }
+    
 }
