@@ -10,8 +10,12 @@ import Integracion.ProxyFinanciera;
 import entities.AprobacionDTO;
 import entities.Renta;
 import entities.TransaccionDTO;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -40,30 +44,34 @@ public class RentaFacade extends AbstractFacade<Renta> {
     public AprobacionDTO crearRenta(TransaccionDTO transaccion) {
         AprobacionDTO apro = proxy.httpPost(transaccion);
         //AprobacionDTO apro = proxy.httpGet();
-        
         /*
-        AprobacionDTO apro = new AprobacionDTO();
+         AprobacionDTO apro = new AprobacionDTO();
          apro.setEstado(true);
          apro.setFechaAprobacion(transaccion.getFecha());
          apro.setNumAprobacion(12);*/
-        if (apro.getEstado()==2) {
-            Renta renta = new Renta();
-            renta.setCedulaUsuario(transaccion.getNumDocumento());
-            renta.setEmail(transaccion.getEmail());
-            renta.setEstado('0');
-            Date date = new Date();
-            renta.setFecha(date);
-            renta.setFechaRenta(transaccion.getFecha());
-            renta.setIdPropiedad((short) transaccion.getIdPropiedad());
-            renta.setPrecioRenta(transaccion.getDescontar());
-            bd.crearRenta(em, renta);
-            //Se coloca la renta en el topico
-        } 
-        
+        if (apro.getEstado() == 2) {
+            try {
+                Renta renta = new Renta();
+                renta.setCedulaUsuario(transaccion.getNumDocumento());
+                renta.setEmail(transaccion.getEmail());
+                renta.setEstado('0');
+                Date date = new Date();
+                renta.setFecha(date);
+                Date dateRenta;
+                dateRenta = new SimpleDateFormat("dd/MM/yyyy").parse(transaccion.getFechaRenta());
+                renta.setFechaRenta(dateRenta);
+                renta.setIdPropiedad((short) transaccion.getIdPropiedad());
+                renta.setPrecioRenta(transaccion.getDescontar());
+                bd.crearRenta(em, renta);
+                //Se coloca la renta en el topico
+            } catch (ParseException ex) {
+                Logger.getLogger(RentaFacade.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         //Devuelvo al REST la Aprobacion para que se la mande a la Presentacion
         //"fecha": "2019-05-24T00:02:44-05:00"
-
         return apro;
+
     }
 
     public List<Renta> mostrarRentas() {

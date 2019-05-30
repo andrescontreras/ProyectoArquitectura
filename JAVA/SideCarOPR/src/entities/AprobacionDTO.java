@@ -14,7 +14,7 @@ import java.util.Date;
 public class AprobacionDTO {
 
     int numAprobacion;
-    Date fechaAprobacion;
+    String fechaAprobacion;
     int estado;
 
     public AprobacionDTO() {
@@ -29,11 +29,11 @@ public class AprobacionDTO {
     }
 
 
-    public Date getFechaAprobacion() {
+    public String getFechaAprobacion() {
         return fechaAprobacion;
     }
 
-    public void setFechaAprobacion(Date fechaAprobacion) {
+    public void setFechaAprobacion(String fechaAprobacion) {
         this.fechaAprobacion = fechaAprobacion;
     }
 
