@@ -78,4 +78,5 @@ public class RentaFacade extends AbstractFacade<Renta> {
 
     public List<Renta> mostrarRentas() {
         return bd.getRentas(em);
+    }
 }
