@@ -15,13 +15,13 @@ import java.util.Date;
 public class TransaccionDTO {
     
         String tipoDocumento;
-        long numDocumento;
+        int numDocumento;
         Short idPropiedad;
         String email;
 	Date fecha;
         String password;
-        long descontar;
-        Date fechaRenta;
+        int descontar;
+        String fechaRenta;
 
     public TransaccionDTO() {}
 
@@ -33,13 +33,15 @@ public class TransaccionDTO {
         this.tipoDocumento = tipoDocumento;
     }
 
-    public long getNumDocumento() {
-        return numDocumento;
+    public int getDescontar() {
+        return descontar;
     }
 
-    public void setNumDocumento(long numDocumento) {
-        this.numDocumento = numDocumento;
+    public void setDescontar(int descontar) {
+        this.descontar = descontar;
     }
+
+    
 
     public Short getIdPropiedad() {
         return idPropiedad;
@@ -73,19 +75,21 @@ public class TransaccionDTO {
         this.password = password;
     }
 
-    public long getDescontar() {
-        return descontar;
+    public int getNumDocumento() {
+        return numDocumento;
     }
 
-    public void setDescontar(long descontar) {
-        this.descontar = descontar;
+    public void setNumDocumento(int numDocumento) {
+        this.numDocumento = numDocumento;
     }
 
-    public Date getFechaRenta() {
+    
+
+    public String getFechaRenta() {
         return fechaRenta;
     }
 
-    public void setFechaRenta(Date fechaRenta) {
+    public void setFechaRenta(String fechaRenta) {
         this.fechaRenta = fechaRenta;
     }
     

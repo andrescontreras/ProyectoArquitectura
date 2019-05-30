@@ -5,7 +5,10 @@
  */
 package Negocio;
 
+import entities.AprobacionDTO;
 import entities.Renta;
+import entities.TransaccionDTO;
+import java.util.Date;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,9 +31,14 @@ public class RentaFacade extends AbstractFacade<Renta> {
         super(Renta.class);
     }
     
-    public void crearRenta(Renta renta){
-        getEntityManager().persist(renta);
-        
+    public AprobacionDTO crearRenta(TransaccionDTO renta){
+        //getEntityManager().persist(renta);
+        AprobacionDTO aprob = new AprobacionDTO();
+        aprob.setEstado(2);
+        Date date= new Date();
+        aprob.setFechaAprobacion(date);
+        aprob.setNumAprobacion(123);
+        return aprob;
         
     }
     

@@ -13,20 +13,21 @@ import java.util.Date;
  */
 public class AprobacionDTO {
 
-    long numAprobacion;
+    int numAprobacion;
     Date fechaAprobacion;
-    boolean estado;
+    int estado;
 
     public AprobacionDTO() {
     }
 
-    public long getNumAprobacion() {
+    public int getNumAprobacion() {
         return numAprobacion;
     }
 
-    public void setNumAprobacion(long numAprobacion) {
+    public void setNumAprobacion(int numAprobacion) {
         this.numAprobacion = numAprobacion;
     }
+
 
     public Date getFechaAprobacion() {
         return fechaAprobacion;
@@ -36,12 +37,14 @@ public class AprobacionDTO {
         this.fechaAprobacion = fechaAprobacion;
     }
 
-    public boolean isEstado() {
+    public int getEstado() {
         return estado;
     }
 
-    public void setEstado(boolean estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
     }
+
+    
 
 }
