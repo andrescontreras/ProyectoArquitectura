@@ -1,9 +1,9 @@
-export class Renta {
+export class TransaccionDTO {
     tipoDocumento: string;
-    numeroDocumento: number;
+    numDocumento: number;
     password: string;
     email: string;
-    monto: number;
+    descontar: number;
     idPropiedad: number;
     fechaRenta: string;
 }

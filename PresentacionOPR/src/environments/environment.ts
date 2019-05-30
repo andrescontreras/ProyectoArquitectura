@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://localhost:8080/api'
+  baseUrl: 'http://10.139.21.40:8080/OPR/webresources/'
 };
 
 /*
