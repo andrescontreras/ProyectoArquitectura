@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="WSUsuarios" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/LogicaFinanciera" />
+      <xs:element name="DoWork">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DoWorkResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/LogicaFinanciera" minOccurs="0" name="DoWorkResult" nillable="true" type="q1:ArrayOfUsuario" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetAllUsuario">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetAllUsuarioResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/LogicaFinanciera" minOccurs="0" name="GetAllUsuarioResult" nillable="true" type="q2:ArrayOfUsuario" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AddUsuario">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/LogicaFinanciera" minOccurs="0" name="usuario" nillable="true" type="q3:Usuario" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AddUsuarioResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="AddUsuarioResult" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetAllUsuarioById">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="id" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetAllUsuarioByIdResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/LogicaFinanciera" minOccurs="0" name="GetAllUsuarioByIdResult" nillable="true" type="q4:Usuario" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="UpdateUsuario">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/LogicaFinanciera" minOccurs="0" name="usuario" nillable="true" type="q5:Usuario" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="UpdateUsuarioResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UpdateUsuarioResult" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DeleteUsuarioById">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="Id" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DeleteUsuarioByIdResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="DeleteUsuarioByIdResult" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="anyType" nillable="true" type="xs:anyType" />
+      <xs:element name="anyURI" nillable="true" type="xs:anyURI" />
+      <xs:element name="base64Binary" nillable="true" type="xs:base64Binary" />
+      <xs:element name="boolean" nillable="true" type="xs:boolean" />
+      <xs:element name="byte" nillable="true" type="xs:byte" />
+      <xs:element name="dateTime" nillable="true" type="xs:dateTime" />
+      <xs:element name="decimal" nillable="true" type="xs:decimal" />
+      <xs:element name="double" nillable="true" type="xs:double" />
+      <xs:element name="float" nillable="true" type="xs:float" />
+      <xs:element name="int" nillable="true" type="xs:int" />
+      <xs:element name="long" nillable="true" type="xs:long" />
+      <xs:element name="QName" nillable="true" type="xs:QName" />
+      <xs:element name="short" nillable="true" type="xs:short" />
+      <xs:element name="string" nillable="true" type="xs:string" />
+      <xs:element name="unsignedByte" nillable="true" type="xs:unsignedByte" />
+      <xs:element name="unsignedInt" nillable="true" type="xs:unsignedInt" />
+      <xs:element name="unsignedLong" nillable="true" type="xs:unsignedLong" />
+      <xs:element name="unsignedShort" nillable="true" type="xs:unsignedShort" />
+      <xs:element name="char" nillable="true" type="tns:char" />
+      <xs:simpleType name="char">
+        <xs:restriction base="xs:int" />
+      </xs:simpleType>
+      <xs:element name="duration" nillable="true" type="tns:duration" />
+      <xs:simpleType name="duration">
+        <xs:restriction base="xs:duration">
+          <xs:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?" />
+          <xs:minInclusive value="-P10675199DT2H48M5.4775808S" />
+          <xs:maxInclusive value="P10675199DT2H48M5.4775807S" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="guid" nillable="true" type="tns:guid" />
+      <xs:simpleType name="guid">
+        <xs:restriction base="xs:string">
+          <xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:attribute name="FactoryType" type="xs:QName" />
+      <xs:attribute name="Id" type="xs:ID" />
+      <xs:attribute name="Ref" type="xs:IDREF" />
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/LogicaFinanciera" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/LogicaFinanciera" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:complexType name="ArrayOfUsuario">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Usuario" nillable="true" type="tns:Usuario" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfUsuario" nillable="true" type="tns:ArrayOfUsuario" />
+      <xs:complexType name="Usuario">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Movimiento" nillable="true" type="tns:ArrayOfMovimiento" />
+          <xs:element minOccurs="0" name="id_usuario" type="xs:decimal" />
+          <xs:element minOccurs="0" name="nombre" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="numero_documento" type="xs:decimal" />
+          <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="saldo" type="xs:decimal" />
+          <xs:element minOccurs="0" name="tipo_documento" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="Usuario" nillable="true" type="tns:Usuario" />
+      <xs:complexType name="ArrayOfMovimiento">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Movimiento" nillable="true" type="tns:Movimiento" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfMovimiento" nillable="true" type="tns:ArrayOfMovimiento" />
+      <xs:complexType name="Movimiento">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Usuario" nillable="true" type="tns:Usuario" />
+          <xs:element minOccurs="0" name="estado" type="xs:boolean" />
+          <xs:element minOccurs="0" name="fecha" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="id_movimiento" type="xs:decimal" />
+          <xs:element minOccurs="0" name="id_usuario" type="xs:decimal" />
+          <xs:element minOccurs="0" name="num_aprovacion" nillable="true" type="xs:decimal" />
+          <xs:element minOccurs="0" name="valor" type="xs:decimal" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="Movimiento" nillable="true" type="tns:Movimiento" />
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="IWSUsuarios_DoWork_InputMessage">
+    <wsdl:part name="parameters" element="tns:DoWork" />
+  </wsdl:message>
+  <wsdl:message name="IWSUsuarios_DoWork_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DoWorkResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWSUsuarios_GetAllUsuario_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllUsuario" />
+  </wsdl:message>
+  <wsdl:message name="IWSUsuarios_GetAllUsuario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWSUsuarios_AddUsuario_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddUsuario" />
+  </wsdl:message>
+  <wsdl:message name="IWSUsuarios_AddUsuario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWSUsuarios_GetAllUsuarioById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllUsuarioById" />
+  </wsdl:message>
+  <wsdl:message name="IWSUsuarios_GetAllUsuarioById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllUsuarioByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWSUsuarios_UpdateUsuario_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUsuario" />
+  </wsdl:message>
+  <wsdl:message name="IWSUsuarios_UpdateUsuario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWSUsuarios_DeleteUsuarioById_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUsuarioById" />
+  </wsdl:message>
+  <wsdl:message name="IWSUsuarios_DeleteUsuarioById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUsuarioByIdResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IWSUsuarios">
+    <wsdl:operation name="DoWork">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWSUsuarios/DoWork" message="tns:IWSUsuarios_DoWork_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWSUsuarios/DoWorkResponse" message="tns:IWSUsuarios_DoWork_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllUsuario">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWSUsuarios/GetAllUsuario" message="tns:IWSUsuarios_GetAllUsuario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWSUsuarios/GetAllUsuarioResponse" message="tns:IWSUsuarios_GetAllUsuario_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUsuario">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWSUsuarios/AddUsuario" message="tns:IWSUsuarios_AddUsuario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWSUsuarios/AddUsuarioResponse" message="tns:IWSUsuarios_AddUsuario_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllUsuarioById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWSUsuarios/GetAllUsuarioById" message="tns:IWSUsuarios_GetAllUsuarioById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWSUsuarios/GetAllUsuarioByIdResponse" message="tns:IWSUsuarios_GetAllUsuarioById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUsuario">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWSUsuarios/UpdateUsuario" message="tns:IWSUsuarios_UpdateUsuario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWSUsuarios/UpdateUsuarioResponse" message="tns:IWSUsuarios_UpdateUsuario_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUsuarioById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWSUsuarios/DeleteUsuarioById" message="tns:IWSUsuarios_DeleteUsuarioById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWSUsuarios/DeleteUsuarioByIdResponse" message="tns:IWSUsuarios_DeleteUsuarioById_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IWSUsuarios" type="tns:IWSUsuarios">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="DoWork">
+      <soap:operation soapAction="http://tempuri.org/IWSUsuarios/DoWork" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllUsuario">
+      <soap:operation soapAction="http://tempuri.org/IWSUsuarios/GetAllUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUsuario">
+      <soap:operation soapAction="http://tempuri.org/IWSUsuarios/AddUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllUsuarioById">
+      <soap:operation soapAction="http://tempuri.org/IWSUsuarios/GetAllUsuarioById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUsuario">
+      <soap:operation soapAction="http://tempuri.org/IWSUsuarios/UpdateUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUsuarioById">
+      <soap:operation soapAction="http://tempuri.org/IWSUsuarios/DeleteUsuarioById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WSUsuarios">
+    <wsdl:port name="BasicHttpBinding_IWSUsuarios" binding="tns:BasicHttpBinding_IWSUsuarios">
+      <soap:address location="http://localhost:8082/WSUsuarios.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
