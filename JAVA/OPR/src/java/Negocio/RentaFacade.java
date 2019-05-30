@@ -46,7 +46,7 @@ public class RentaFacade extends AbstractFacade<Renta> {
          apro.setEstado(true);
          apro.setFechaAprobacion(transaccion.getFecha());
          apro.setNumAprobacion(12);*/
-        if (apro.isEstado()) {
+        if (apro.getEstado()==2) {
             Renta renta = new Renta();
             renta.setCedulaUsuario(transaccion.getNumDocumento());
             renta.setEmail(transaccion.getEmail());
@@ -54,8 +54,8 @@ public class RentaFacade extends AbstractFacade<Renta> {
             Date date = new Date();
             renta.setFecha(date);
             renta.setFechaRenta(transaccion.getFecha());
-            renta.setIdPropiedad((short) 2);
-            renta.setPrecioRenta(43);
+            renta.setIdPropiedad((short) transaccion.getIdPropiedad());
+            renta.setPrecioRenta(transaccion.getDescontar());
             bd.crearRenta(em, renta);
             //Se coloca la renta en el topico
         } 

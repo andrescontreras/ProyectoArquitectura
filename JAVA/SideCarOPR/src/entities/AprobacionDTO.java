@@ -15,7 +15,7 @@ public class AprobacionDTO {
 
     long numAprobacion;
     Date fechaAprobacion;
-    boolean estado;
+    int estado;
 
     public AprobacionDTO() {
     }
@@ -36,12 +36,14 @@ public class AprobacionDTO {
         this.fechaAprobacion = fechaAprobacion;
     }
 
-    public boolean isEstado() {
+    public int getEstado() {
         return estado;
     }
 
-    public void setEstado(boolean estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
     }
+
+    
 
 }
