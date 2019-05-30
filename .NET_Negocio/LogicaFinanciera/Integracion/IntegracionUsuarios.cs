@@ -46,6 +46,14 @@ namespace LogicaFinanciera.Integracion
 			
 		}
 
+		public Usuario FindUsuario(int documento, string password) {
+
+			Usuario usuario = db.Usuario
+				.Where(s => s.numero_documento == documento && s.password == password)
+				.FirstOrDefault();
+			return usuario;
+		}
+
 		public Usuario EditUsuario(Usuario usuario)
 		{
 			db.Entry(usuario).State = EntityState.Modified;
@@ -95,5 +103,6 @@ namespace LogicaFinanciera.Integracion
 				throw;
 			}
 		}
+
 	}
 }

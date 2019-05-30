@@ -1,4 +1,5 @@
 ﻿using LogicaFinanciera.Integracion;
+using LogicaFinanciera.SideCar;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,25 @@ namespace LogicaFinanciera.Negocio
 		public Movimiento DeleteMovimiento(int id)
 		{
 			return i.DeleteMovimiento(id);
+		}
+
+		// funciones extra
+		public AprobacionDTO generarMovimientoExitoso(int idUsuario,int monto) {
+			Movimiento movimiento = new Movimiento();
+			Random randObj = new Random();
+			movimiento.estado = true;
+			movimiento.id_usuario = idUsuario;
+			movimiento.num_aprovacion = randObj.Next(1001, 10000);
+			movimiento.valor = monto;
+			movimiento.fecha = DateTime.Now;
+
+			AddMovimiento(movimiento);
+			AprobacionDTO aprobacionDTO = new AprobacionDTO();
+			aprobacionDTO.estado = 2;
+			aprobacionDTO.fechaAprovacion = movimiento.fecha;
+			aprobacionDTO.numAProvacion = movimiento.num_aprovacion;
+
+			return aprobacionDTO; ;
 		}
 	}
 }

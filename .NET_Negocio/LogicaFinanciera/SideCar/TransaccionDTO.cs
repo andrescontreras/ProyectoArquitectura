@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace REST_Financiera.Models
+namespace LogicaFinanciera.SideCar
 {
 	public class TransaccionDTO
 	{
@@ -11,7 +11,11 @@ namespace REST_Financiera.Models
 		public int numero_documento { get; set; }
 		public string password { get; set; }
 		public int monto { get; set; }
-		public bool estado { get; set; }
 
+		// otros atributos
+
+		public int idPropiedad { get; set; }
+		public string email { get; set; }
+		public DateTime fecha { get; set; }
 	}
 }

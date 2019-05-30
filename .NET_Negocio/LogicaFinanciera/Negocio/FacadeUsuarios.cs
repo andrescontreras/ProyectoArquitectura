@@ -1,4 +1,5 @@
 ﻿using LogicaFinanciera.Integracion;
+using LogicaFinanciera.SideCar;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,5 +34,46 @@ namespace LogicaFinanciera.Negocio
 		{
 			return i.DeleteUsuario(id);
 		}
+
+		// funciones extra
+
+		
+		/*
+		 Si no encuatra el usuario retorna -1
+		 Si lo encuentra retorna lo que diga la funcion descontar pago
+			 */
+
+		public int PagarRenta(TransaccionDTO transaccionDTO) {
+
+			Usuario usuario = FindUsuario(transaccionDTO.numero_documento, transaccionDTO.password);
+			if(usuario != null)
+			{
+				return DescontarPago(usuario, transaccionDTO.monto);
+			}
+			return -1;
+
+		}
+
+		public Usuario FindUsuario(int documento, string password)
+		{
+			return i.FindUsuario(documento, password);
+		}
+
+
+		/*
+		 Si puede descontar el pago retorna el id del usuario
+		 Si no tiene fondos suficientes retorna -2;
+			 */
+		public int DescontarPago(Usuario usuario,int monto)
+		{
+			if (usuario.saldo > monto)
+			{
+				usuario.saldo = usuario.saldo - monto;
+				EditUsuario(usuario);
+				return usuario.id_usuario;
+			}
+			return -2;
+		}
+
 	}
 }

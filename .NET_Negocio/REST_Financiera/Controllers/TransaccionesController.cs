@@ -1,4 +1,5 @@
-﻿using REST_Financiera.Models;
+﻿using LogicaFinanciera.Negocio;
+using LogicaFinanciera.SideCar;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,9 @@ namespace REST_Financiera.Controllers
 {
     public class TransaccionesController : ApiController
     {
-        // GET: api/Transacciones
-        public List<TransaccionDTO> Get()
+		private FacadeTransacciones ft = new FacadeTransacciones();
+		// GET: api/Transacciones
+		public List<TransaccionDTO> Get()
         {
 			List<TransaccionDTO> transaccionDTOs = new List<TransaccionDTO>();
 			TransaccionDTO t = new TransaccionDTO();
@@ -45,19 +47,7 @@ namespace REST_Financiera.Controllers
         // POST: api/Transacciones
         public object Post(TransaccionDTO transaccionDTO)
         {
-			TransaccionDTO t = new TransaccionDTO();
-			t = transaccionDTO;
-			if (t.password == "password")
-			{
-				t.estado = true;
-				t.monto = 10000000;
-				return Ok(t);
-			}
-			else {
-				t.estado = false;
-				return Ok(t);
-			}
-			
+			return Ok( ft.pagarRenta(transaccionDTO));
         }
 
         // PUT: api/Transacciones/5
