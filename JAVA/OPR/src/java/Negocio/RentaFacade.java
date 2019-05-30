@@ -5,6 +5,7 @@
  */
 package Negocio;
 
+import Integracion.IntegracionBD;
 import entities.Renta;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -29,9 +30,16 @@ public class RentaFacade extends AbstractFacade<Renta> {
     }
     
     public void crearRenta(Renta renta){
-        getEntityManager().persist(renta);
-        
-        
+        getEntityManager().persist(renta); 
     }
-    
+    IntegracionBD bd  = new IntegracionBD();
+    public void revisarContratos(){
+        
+        if(em==null)
+        {
+            System.err.println("null :(");
+        }else{
+            bd.revisarContratos(em);
+        }
+    }
 }
