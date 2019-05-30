@@ -5,13 +5,14 @@
  */
 package Negocio;
 
+
 import Integracion.IntegradorTopicoRenta;
 import entities.Renta;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.jms.JMSException;
+import javax.naming.NamingException;
 
 /**
  *
@@ -20,8 +21,8 @@ import javax.jms.JMSException;
 @Stateless
 public class FacadeInteroperabilidadOPR {
    
-    @EJB
-    private IntegradorTopicoRenta integradorTopicoRenta;
+
+    private final IntegradorTopicoRenta integradorTopicoRenta;
     public FacadeInteroperabilidadOPR(){
         integradorTopicoRenta = new IntegradorTopicoRenta();
     }
@@ -29,7 +30,11 @@ public class FacadeInteroperabilidadOPR {
     // "Insert Code > Add Business Method")
     public void InformarSistemaERP(Renta renta){
         try {
-            integradorTopicoRenta.enviarATopico(renta);
+            try {
+                integradorTopicoRenta.enviarATopico(renta);
+            } catch (NamingException ex) {
+                Logger.getLogger(FacadeInteroperabilidadOPR.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } catch (JMSException ex) {
             Logger.getLogger(FacadeInteroperabilidadOPR.class.getName()).log(Level.SEVERE, null, ex);
         }

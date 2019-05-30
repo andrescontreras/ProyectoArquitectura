@@ -5,7 +5,7 @@
  */
 package negocio;
 
-import entities.Renta;
+import entities.RentaErp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.StringTokenizer;
@@ -41,15 +41,15 @@ public class ListenerTopicoRenta implements MessageListener {
                 String strDatos = msg.getText();
                 System.err.println(strDatos);
                 StringTokenizer tokens = new StringTokenizer(strDatos, ",");
-                Short id = Short.parseShort(tokens.nextToken());
-                String cedulaUsuario = tokens.nextToken();
-                short idPropiedad = Short.parseShort(tokens.nextToken());
+            //  Short id = Short.parseShort(tokens.nextToken());
+                long cedulaUsuario = Long.parseLong(tokens.nextToken());
                 String email = tokens.nextToken();
+                short idPropiedad = Short.parseShort(tokens.nextToken());
                 long precioRenta = Long.parseLong(tokens.nextToken());
                 Date fecha = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").parse(tokens.nextToken());
                 Character estado = tokens.nextToken().charAt(0);
-              
-                Renta r = new Renta(id,cedulaUsuario,idPropiedad,email,precioRenta,fecha,estado);
+                Date fecha2 = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").parse(tokens.nextToken());
+                RentaErp r = new RentaErp(cedulaUsuario,idPropiedad,email,precioRenta,fecha,estado,fecha2);
                 FacadeInteroperabilidadERP f = new FacadeInteroperabilidadERP();
                 f.persist(r);
                 //    System.out.println("Recibido asincrono [" + msg.getText() + "]");

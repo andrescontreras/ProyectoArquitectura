@@ -5,8 +5,8 @@
  */
 package negocio;
 
-import entities.Renta;
-import integracion.RentaJpaController;
+import entities.RentaErp;
+import integracion.RentaErpJpaController;
 import integracion.exceptions.RollbackFailureException;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -33,13 +33,13 @@ import javax.persistence.Persistence;
 @LocalBean
 public class FacadeInteroperabilidadERP {
 
-    public void persist(Renta r){
+    public void persist(RentaErp r){
    
       
         try {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("SideCarERPPU");
-            RentaJpaController control= new RentaJpaController(emf);
-            Renta renta = r;
+            RentaErpJpaController control= new RentaErpJpaController(emf);
+            RentaErp renta = r;
             control.create(renta);
         } catch (RollbackFailureException ex) {
             Logger.getLogger(FacadeInteroperabilidadERP.class.getName()).log(Level.SEVERE, null, ex);
