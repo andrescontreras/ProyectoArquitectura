@@ -64,6 +64,8 @@ public class RentaFacade extends AbstractFacade<Renta> {
                 renta.setPrecioRenta(transaccion.getDescontar());
                 bd.crearRenta(em, renta);
                 //Se coloca la renta en el topico
+                FacadeInteroperabilidadOPR interoperbilidad = new FacadeInteroperabilidadOPR();
+                interoperbilidad.InformarSistemaERP(renta);
             } catch (ParseException ex) {
                 Logger.getLogger(RentaFacade.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -76,6 +78,4 @@ public class RentaFacade extends AbstractFacade<Renta> {
 
     public List<Renta> mostrarRentas() {
         return bd.getRentas(em);
-    }
-
 }
