@@ -7,11 +7,11 @@ import { Propiedad } from '../SideCar/Propiedad';
 @Injectable({
   providedIn: 'root'
 })
-export class RestBuscarPropiedadService {
+export class ProxyBuscarPropiedadService {
 
-  baseUrl = environment.baseUrl;
+  baseUrl = environment.baseUrl + 'propiedad';
   // url = this.baseUrl + '/propieda';
-  url = 'http://10.192.12.44:8080/OPR/webresources/entities.propiedad'
+  url = this.baseUrl;
   constructor(private http: HttpClient) {
   }
 
@@ -40,26 +40,7 @@ export class RestBuscarPropiedadService {
     });
   }
 
-  getClienteby(id: number): Observable<Propiedad>{
-    return this.http.get<Propiedad>(this.url , {
-      withCredentials: true
-    });
-  }
-
-  getClientebyNombre(nombre: string): Observable<Propiedad>{
-    return this.http.get<Propiedad>(this.url + '/n/' + nombre  , {
-      withCredentials: true
-    });
-  }
-
-  getClientebyIdentificacion(id: number): Observable<Propiedad>{
-    return this.http.get<Propiedad>(this.url + '/i/' + id  , {
-      withCredentials: true
-    });
-  }
-
   crearCliente(cliente: Propiedad){
-
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.post<Propiedad>(this.url,cliente, {

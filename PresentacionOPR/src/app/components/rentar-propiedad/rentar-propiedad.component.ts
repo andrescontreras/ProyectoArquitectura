@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Propiedad } from 'src/app/SideCar/Propiedad';
 import { TransaccionDTO } from 'src/app/SideCar/TransaccionDTO';
+import { ProxyRentarPropiedadService } from 'src/app/services/proxy-rentar-propiedad.service';
 
 @Component({
   selector: 'app-rentar-propiedad',
@@ -13,7 +14,7 @@ export class RentarPropiedadComponent implements OnInit {
   @Input() id: number;
 
   transaccion: TransaccionDTO;
-  constructor() { }
+  constructor(private service: ProxyRentarPropiedadService) { }
 
   ngOnInit() {
     this.transaccion = new TransaccionDTO();
