@@ -5,8 +5,7 @@
         <group>
             <file>file:/C:/Users/santi/OneDrive%20-%20Pontificia%20Universidad%20Javeriana/Universidad/Arquitectura%20de%20Software/Proyecto/Tercera%20entrega/ProyectoArquitecturaV2/ProyectoArquitectura/JAVA/OPR/src/java/Negocio/RentaFacade.java</file>
             <file>file:/C:/Users/santi/OneDrive%20-%20Pontificia%20Universidad%20Javeriana/Universidad/Arquitectura%20de%20Software/Proyecto/Tercera%20entrega/ProyectoArquitecturaV2/ProyectoArquitectura/JAVA/OPR/src/java/Negocio/PropiedadFacade.java</file>
-            <file>file:/C:/Users/santi/OneDrive%20-%20Pontificia%20Universidad%20Javeriana/Universidad/Arquitectura%20de%20Software/Proyecto/Tercera%20entrega/ProyectoArquitecturaV2/ProyectoArquitectura/JAVA/OPR/src/java/Integracion/IntegracionBD.java</file>
-            <file>file:/C:/Users/santi/OneDrive%20-%20Pontificia%20Universidad%20Javeriana/Universidad/Arquitectura%20de%20Software/Proyecto/Tercera%20entrega/ProyectoArquitecturaV2/ProyectoArquitectura/JAVA/OPR/src/java/Integracion/IntegradorCorreo.java</file>
+            <file>file:/C:/Users/santi/OneDrive%20-%20Pontificia%20Universidad%20Javeriana/Universidad/Arquitectura%20de%20Software/Proyecto/Tercera%20entrega/ProyectoArquitecturaV2/ProyectoArquitectura/JAVA/OPR/src/java/service/RentaFacadeREST.java</file>
         </group>
     </open-files>
 </project-private>

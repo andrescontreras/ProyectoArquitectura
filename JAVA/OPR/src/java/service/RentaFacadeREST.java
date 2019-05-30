@@ -6,7 +6,9 @@
 package service;
 
 import Negocio.RentaFacade;
+import entities.AprobacionDTO;
 import entities.Renta;
+import entities.TransaccionDTO;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -38,11 +40,10 @@ public class RentaFacadeREST extends AbstractFacade<Renta> {
     }
 
     @POST
-    @Override
     @Consumes({ "application/json"})
-    public void create(Renta entity) {
+    public AprobacionDTO create( TransaccionDTO entity) {
         //super.create(entity); 
-        rentaF.crearRenta(entity);
+        return rentaF.crearRenta(entity);
     }
 
     @PUT
