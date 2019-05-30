@@ -23,8 +23,10 @@ import org.apache.http.util.EntityUtils;
  * @author imroo
  */
 public class ProxyFinanciera {
-    public void httpPost (TransaccionDTO t)
+    public AprobacionDTO httpPost (TransaccionDTO t)
     {
+        System.out.println("Estoy en post");
+        AprobacionDTO ap = new AprobacionDTO();
         try (CloseableHttpClient httpClient = HttpClientBuilder.create().build()) {
             Gson gson = new Gson();
             HttpPost request = new HttpPost("http://srvcronos.tk:8081/api/Transacciones");
@@ -35,13 +37,15 @@ public class ProxyFinanciera {
             
             
             String content = EntityUtils.toString(result.getEntity());
-            
+            System.out.println("Pre conversion");
+            ap = gson.fromJson(content, AprobacionDTO.class);
             int statusCode = result.getStatusLine().getStatusCode();
             System.out.println("statusCode = " + statusCode);
             System.out.println("content = " + content);
         }
         catch (IOException ex) {
         }
+        return ap;
     }
     public AprobacionDTO httpGet() {
 
@@ -52,7 +56,7 @@ public class ProxyFinanciera {
         request.addHeader("content-type", "application/json");
         HttpResponse result = httpClient.execute(request);
         String json = EntityUtils.toString(result.getEntity(), "UTF-8");  
-
+        
         com.google.gson.Gson gson = new com.google.gson.Gson();                       
         response = gson.fromJson(json, AprobacionDTO.class);
 

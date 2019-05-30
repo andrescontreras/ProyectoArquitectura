@@ -38,8 +38,8 @@ public class RentaFacade extends AbstractFacade<Renta> {
     }
 
     public AprobacionDTO crearRenta(TransaccionDTO transaccion) {
-        proxy.httpPost(transaccion);
-        AprobacionDTO apro = proxy.httpGet();
+        AprobacionDTO apro = proxy.httpPost(transaccion);
+        //AprobacionDTO apro = proxy.httpGet();
         
         /*
         AprobacionDTO apro = new AprobacionDTO();
