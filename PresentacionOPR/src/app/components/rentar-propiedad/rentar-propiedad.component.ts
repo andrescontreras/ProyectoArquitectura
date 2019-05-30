@@ -13,6 +13,7 @@ export class RentarPropiedadComponent implements OnInit {
   @Input() propiedad: Propiedad;
   @Input() id: number;
 
+
   transaccion: TransaccionDTO;
   constructor(private service: ProxyRentarPropiedadService) { }
 
@@ -28,5 +29,9 @@ export class RentarPropiedadComponent implements OnInit {
     console.log(this.propiedad, this.id);
     this.transaccion.monto = this.propiedad.precio;
     this.transaccion.idPropiedad = this.propiedad.id;
+    console.log(this.transaccion);
+    this.service.crearRenta(this.transaccion).subscribe((response) => {
+      console.log(response);
+    });
   }
 }
