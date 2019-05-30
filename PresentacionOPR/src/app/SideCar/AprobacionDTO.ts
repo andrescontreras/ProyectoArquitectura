@@ -1,5 +1,5 @@
-export class AprovacionDTO {
-    numeroAprobacion: number;
-    fechaAprovacion: string;
-    estado: boolean;
+export class AprobacionDTO {
+    numAprobacion: number;
+    fechaAprobacion: string;
+    estado: number;
 }
