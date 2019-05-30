@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Propiedad } from 'src/app/SideCar/Propiedad';
-import { RestBuscarPropiedadService } from 'src/app/services/proxy-buscar-propiedad.service';
+import { ProxyBuscarPropiedadService } from 'src/app/services/proxy-buscar-propiedad.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -13,7 +13,7 @@ export class DetallePropiedadComponent implements OnInit {
   id = 0;
   propiedad : Propiedad;
   
-  constructor(private service: RestBuscarPropiedadService,private ruta: ActivatedRoute) { }
+  constructor(private service: ProxyBuscarPropiedadService,private ruta: ActivatedRoute) { }
 
   async ngOnInit() {
     this.ruta.params.subscribe(params => {

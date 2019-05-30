@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Propiedad } from 'src/app/SideCar/Propiedad';
-import { RestBuscarPropiedadService } from 'src/app/services/proxy-buscar-propiedad.service';
+import { ProxyBuscarPropiedadService } from 'src/app/services/proxy-buscar-propiedad.service';
 
 @Component({
   selector: 'app-buscar-propiedad',
@@ -13,7 +13,7 @@ export class BuscarPropiedadComponent implements OnInit {
   busqueda = "";
   marked1 = true;
   marked2 = false;
-  constructor(private service: RestBuscarPropiedadService) { }
+  constructor(private service: ProxyBuscarPropiedadService) { }
 
   ngOnInit() {
   //  this.llenarDatosPrueba();
