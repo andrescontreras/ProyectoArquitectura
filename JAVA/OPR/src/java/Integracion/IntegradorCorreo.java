@@ -57,7 +57,7 @@ public class IntegradorCorreo {
 
             Transport.send(messageSession);
 
-            //System.out.println("Done");
+            System.out.println("Done");
 
         } catch (MessagingException e) {
             e.printStackTrace();

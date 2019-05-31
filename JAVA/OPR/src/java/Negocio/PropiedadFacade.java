@@ -46,11 +46,11 @@ public class PropiedadFacade extends AbstractFacade<Propiedad>{
     public void crearPropiedad(Propiedad propiedad){
         try {
             bd.crearPropiedad(em, propiedad);
-            String datosCorreo = "santiagosw18@gmail.com" + ","+ "Propiedad agregada" + "," + "La propiedad que postulo fue agregada";
+            String datosCorreo = propiedad.getDescripcion() + ","+ "Propiedad agregada" + "," + "La propiedad que postulo fue agregada";
             intCola = new IntegradorColaCorreo();
             try {
                 intCola.sendTestMSg(datosCorreo);
-                //    correo.enviarCorreo("santiagosw18@gmail.com", "Propiedad agregada", "La propiedad que postulo fue agregada");
+                //   correo.enviarCorreo("santiagosw18@gmail.com", "Propiedad agregada", "La propiedad que postulo fue agregada");
             } catch (NamingException ex) {
                 Logger.getLogger(PropiedadFacade.class.getName()).log(Level.SEVERE, null, ex);
             }
