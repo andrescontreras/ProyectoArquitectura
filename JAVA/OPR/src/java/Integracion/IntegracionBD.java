@@ -71,14 +71,17 @@ public class IntegracionBD {
         StoredProcedureQuery actualizar = em.createStoredProcedureQuery("renta_tapi.actualizar_contratos");
         actualizar.execute();
     }
-    public String confirmarContrato(int idPropiedad, int documentoUsuario, EntityManager em){
-        Query query = em.createQuery("Select e from Renta e WHERE e.estado = 0 and e.cedulaUsuario = "+documentoUsuario+" and e.idPropiedad = "+idPropiedad);
+    public String confirmarContrato(int idPropiedada, int documentoUsuario, EntityManager em){
+        Query query = em.createQuery("Select e from Renta e where e.cedulaUsuario = "+documentoUsuario+" and e.estado = '0' and e.idPropiedad = "+idPropiedada);
         List<Renta> rentas = (List<Renta>)query.getResultList();
+        for (Renta r : rentas){
+            System.out.println(r.getEstado());
+            }
         if(rentas.size()==0){
             System.out.println("no existe la propiedad aociada a este usuario puede que no exista o que ya se venció el contrato");
             return ("no existe la propiedad aociada a este usuario puede que no exista o que ya se venció el contrato");
         }else{
-            Query actualizar = em.createQuery("Update Renta e set e.estado = '1' WHERE e.estado = '0' and e.cedulaUsuario = "+documentoUsuario+" and e.idPropiedad = "+idPropiedad);
+            Query actualizar = em.createQuery("UPDATE Renta e set e.estado = '1' WHERE e.cedulaUsuario = "+documentoUsuario+" and e.estado = '0' and e.idPropiedad = "+idPropiedada);
             actualizar.executeUpdate();
              System.out.println("contrato actualizado correctamente");
             return ("contrato actualizado correctamente");
