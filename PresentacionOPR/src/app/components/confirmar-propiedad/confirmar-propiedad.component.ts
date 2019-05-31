@@ -8,7 +8,7 @@ import { ProxyRentarPropiedadService } from 'src/app/services/proxy-rentar-propi
   templateUrl: './confirmar-propiedad.component.html',
   styleUrls: ['./confirmar-propiedad.component.css']
 })
-export class RentarPropiedadComponent implements OnInit {
+export class ConfirmarPropiedadComponent implements OnInit {
 
   @Input() propiedad: Propiedad;
   @Input() id: number;

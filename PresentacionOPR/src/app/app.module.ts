@@ -11,6 +11,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { NavComponent } from './components/nav/nav.component';
 import { AgregarPropiedadComponent } from './components/agregar-propiedad/agregar-propiedad.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ConfirmarPropiedadComponent } from './components/confirmar-propiedad/confirmar-propiedad.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
     BuscarPropiedadComponent,
     DetallePropiedadComponent,
     RentarPropiedadComponent,
+    ConfirmarPropiedadComponent,
     FooterComponent,
     NavComponent,
     AgregarPropiedadComponent

@@ -6,6 +6,7 @@ import { Propiedad } from '../SideCar/Propiedad';
 import { Renta } from '../SideCar/Renta';
 import { AprobacionDTO } from '../SideCar/AprobacionDTO';
 import { TransaccionDTO } from '../SideCar/TransaccionDTO';
+import { ConfirmarDTO } from '../SideCar/ConfirmarDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,15 @@ export class ProxyRentarPropiedadService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.post<AprobacionDTO>(this.url,renta, {
+      headers: headers,
+      withCredentials: true
+    });
+  }
+
+  confirmarRenta(confirmar: ConfirmarDTO){
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post<string>(this.url,confirmar, {
       headers: headers,
       withCredentials: true
     });
