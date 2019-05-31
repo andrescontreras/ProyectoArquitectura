@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Propiedad } from 'src/app/SideCar/Propiedad';
 import { TransaccionDTO } from 'src/app/SideCar/TransaccionDTO';
 import { ProxyRentarPropiedadService } from 'src/app/services/proxy-rentar-propiedad.service';
+import { ConfirmarDTO } from 'src/app/SideCar/ConfirmarDTO';
 
 @Component({
   selector: 'app-confirmar-propiedad',
@@ -12,44 +13,23 @@ export class ConfirmarPropiedadComponent implements OnInit {
 
   @Input() propiedad: Propiedad;
   @Input() id: number;
-  alertCorrecto = false;
-  alertError = false;
+  alert = false;
   messageCom: string;
 
-  transaccion: TransaccionDTO;
+  confirmacion: ConfirmarDTO;
   constructor(private service: ProxyRentarPropiedadService) { }
 
   ngOnInit() {
-    this.transaccion = new TransaccionDTO();
+    this.confirmacion = new ConfirmarDTO();
     console.log("ENTRO");
-    this.transaccion.descontar = this.propiedad.precio;
-    this.transaccion.idPropiedad = this.propiedad.id;
+    this.confirmacion.idPropiedad = this.propiedad.id;
   }
 
   confirmarRenta() {
-    console.log(this.propiedad, this.id);
-    this.transaccion.descontar = this.propiedad.precio;
-    this.transaccion.idPropiedad = this.propiedad.id;
-    console.log(this.transaccion);
-    this.service.crearRenta(this.transaccion).subscribe((response) => {
-      console.log(response);
-      switch (response.estado) {
-        case 2:
-          this.alertCorrecto = true;
-          this.alertError = false;
-          this.messageCom = "Pago realizado exitosamente";
-          break;
-        case 1:
-          this.alertError = true;
-          this.alertCorrecto = false;
-          this.messageCom = "El usuarios no tiene fondos suficientes";
-          break;
-        case 0:
-          this.alertError = true;
-          this.alertCorrecto = false;
-          this.messageCom = "El usuarios no tiene fondos suficientes";
-          break;
-      }
-    });
+   this.service.confirmarRenta(this.confirmacion).subscribe((response) => {
+    this.alert = true;
+    this.messageCom  = response;
+     console.log(response);
+   });
   }
 }
