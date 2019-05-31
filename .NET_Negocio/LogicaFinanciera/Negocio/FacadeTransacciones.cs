@@ -12,13 +12,13 @@ namespace LogicaFinanciera.Negocio
 			int estado = new FacadeUsuarios().PagarRenta(transaccionDTO);
 			if (estado > 0)
 			{
-				return new FacadeMovimientos().generarMovimientoExitoso(estado, transaccionDTO.monto);
+				return new FacadeMovimientos().generarMovimientoExitoso(estado, transaccionDTO.descontar);
 			}
 
 			AprobacionDTO aprobacionDTO = new AprobacionDTO();
 			aprobacionDTO.estado = estado == -2 ? 1 : 0;
-			aprobacionDTO.numAProvacion = -1;
-			aprobacionDTO.fechaAprovacion = DateTime.Now;
+			aprobacionDTO.numAprobacion = -1;
+			aprobacionDTO.fechaAprobacion = DateTime.Now;
 			return aprobacionDTO;
 		}
 

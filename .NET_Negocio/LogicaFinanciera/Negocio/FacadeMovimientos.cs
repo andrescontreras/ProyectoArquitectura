@@ -48,8 +48,8 @@ namespace LogicaFinanciera.Negocio
 			AddMovimiento(movimiento);
 			AprobacionDTO aprobacionDTO = new AprobacionDTO();
 			aprobacionDTO.estado = 2;
-			aprobacionDTO.fechaAprovacion = movimiento.fecha;
-			aprobacionDTO.numAProvacion = movimiento.num_aprovacion;
+			aprobacionDTO.fechaAprobacion = movimiento.fecha;
+			aprobacionDTO.numAprobacion = movimiento.num_aprovacion;
 
 			return aprobacionDTO; ;
 		}

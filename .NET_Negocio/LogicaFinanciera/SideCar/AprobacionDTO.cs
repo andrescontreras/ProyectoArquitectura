@@ -7,8 +7,8 @@ namespace LogicaFinanciera.SideCar
 {
 	public class AprobacionDTO
 	{
-		public int? numAProvacion { get; set; }
-		public DateTime fechaAprovacion { get; set; }
+		public int? numAprobacion { get; set; }
+		public DateTime fechaAprobacion { get; set; }
 		public int estado { get; set; }
 	}
 }

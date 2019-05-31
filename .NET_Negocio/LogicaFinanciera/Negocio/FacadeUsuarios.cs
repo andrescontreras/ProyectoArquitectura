@@ -45,10 +45,10 @@ namespace LogicaFinanciera.Negocio
 
 		public int PagarRenta(TransaccionDTO transaccionDTO) {
 
-			Usuario usuario = FindUsuario(transaccionDTO.numero_documento, transaccionDTO.password);
+			Usuario usuario = FindUsuario(transaccionDTO.numDocumento, transaccionDTO.password);
 			if(usuario != null)
 			{
-				return DescontarPago(usuario, transaccionDTO.monto);
+				return DescontarPago(usuario, transaccionDTO.descontar);
 			}
 			return -1;
 
