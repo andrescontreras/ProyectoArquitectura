@@ -6,7 +6,10 @@
 package service;
 
 import Negocio.RentaFacade;
+import entities.AprobacionDTO;
+import entities.ConfirmacionDTO;
 import entities.Renta;
+import entities.TransaccionDTO;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -27,68 +30,33 @@ import javax.ws.rs.Produces;
  */
 @Stateless
 @Path("renta")
-public class RentaFacadeREST extends AbstractFacade<Renta> {
-    @PersistenceContext(unitName = "LogicaOPRPU")
-    private EntityManager em;
+public class RentaFacadeREST {
+
     
     @EJB
     RentaFacade rentaF;
-    public RentaFacadeREST() {
-        super(Renta.class);
-    }
+    public RentaFacadeREST() {}
 
     @POST
-    @Override
     @Consumes({ "application/json"})
-    public void create(Renta entity) {
+    public AprobacionDTO create(TransaccionDTO entity) {
         //super.create(entity); 
-        rentaF.crearRenta(entity);
+        return rentaF.crearRenta(entity);
     }
-
-    @PUT
-    @Path("{id}")
+    
+    @POST
     @Consumes({"application/json"})
-    public void edit(@PathParam("id") Short id, Renta entity) {
-        super.edit(entity);
-    }
-
-    @DELETE
-    @Path("{id}")
-    public void remove(@PathParam("id") Short id) {
-        super.remove(super.find(id));
+    @Path("confirmar")
+    public String confirmar(ConfirmacionDTO confirmacion) {   
+        return rentaF.confirmarContrato(confirmacion.getIdPropiedad(), confirmacion.getDocumentoUsuario() );
     }
 
     @GET
-    @Path("{id}")
-    @Produces({"application/json"})
-    public Renta find(@PathParam("id") Short id) {
-        return super.find(id);
-    }
-
-    @GET
-    @Override
     @Produces({"application/json"})
     public List<Renta> findAll() {
-        return super.findAll();
+        return rentaF.mostrarRentas();
     }
-
-    @GET
-    @Path("{from}/{to}")
-    @Produces({"application/json"})
-    public List<Renta> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return super.findRange(new int[]{from, to});
-    }
-
-    @GET
-    @Path("count")
-    @Produces("text/plain")
-    public String countREST() {
-        return String.valueOf(super.count());
-    }
-
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
+    
+    
     
 }

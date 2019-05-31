@@ -12,6 +12,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.StoredProcedureQuery;
 
 /**
  *
@@ -55,4 +56,36 @@ public class IntegracionBD {
      public void crearRenta(EntityManager em,Renta renta){
         em.persist(renta);
      }
+     public List<Renta> getRentas(EntityManager em){
+         Query query = em.createQuery("Select e from Renta e");
+        return (List<Renta>)query.getResultList();
+     }
+
+    public void revisarContratos(EntityManager em) {
+        //Query query = em.createQuery("Select e from Propiedad e");
+        System.out.println("holaaaa");
+        /*Query select = em.createQuery("Select e from Renta e WHERE e.estado = '0'");
+        List <Renta> rentas = (List<Renta>)select.getResultList();
+        for (Renta r : rentas){
+            System.out.println(r.getEstado());
+            }
+        Query update = em.createQuery("UPDATE Renta e SET e.estado = '2' WHERE e.estado = '0'");
+        update.executeUpdate();
+                */
+        StoredProcedureQuery actualizar = em.createStoredProcedureQuery("renta_tapi.actualizar_contratos");
+        actualizar.execute();
+    }
+    public String confirmarContrato(int idPropiedad, int documentoUsuario, EntityManager em){
+        Query query = em.createQuery("Select e from Renta e WHERE e.estado = 0 and e.cedulaUsuario = "+documentoUsuario+" and e.idPropiedad = "+idPropiedad);
+        List<Renta> rentas = (List<Renta>)query.getResultList();
+        if(rentas.size()==0){
+            System.out.println("no existe la propiedad aociada a este usuario puede que no exista o que ya se venció el contrato");
+            return ("no existe la propiedad aociada a este usuario puede que no exista o que ya se venció el contrato");
+        }else{
+            Query actualizar = em.createQuery("Update Renta e set e.estado = '1' WHERE e.estado = '0' and e.cedulaUsuario = "+documentoUsuario+" and e.idPropiedad = "+idPropiedad);
+            actualizar.executeUpdate();
+             System.out.println("contrato actualizado correctamente");
+            return ("contrato actualizado correctamente");
+        }
+    }
 }
