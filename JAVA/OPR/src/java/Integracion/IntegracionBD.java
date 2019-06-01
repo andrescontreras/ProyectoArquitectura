@@ -76,16 +76,16 @@ public class IntegracionBD {
         actualizar.execute();
     }
     public String confirmarContrato(int idPropiedad, int documentoUsuario, EntityManager em){
-        Query query = em.createQuery("Select e from Renta e WHERE e.estado = 0 and e.cedulaUsuario = "+documentoUsuario+" and e.idPropiedad = "+idPropiedad);
+        Query query = em.createQuery("Select e from Renta e WHERE e.cedulaUsuario = "+documentoUsuario+" and e.estado = '0' and e.idPropiedad = "+idPropiedad);
         List<Renta> rentas = (List<Renta>)query.getResultList();
         if(rentas.size()==0){
             System.out.println("no existe la propiedad aociada a este usuario puede que no exista o que ya se venció el contrato");
-            return ("no existe la propiedad aociada a este usuario puede que no exista o que ya se venció el contrato");
+            return ("No existe la propiedad asociada a este usuario puede que no exista, ya se venció el contrato o ya fue autorizado");
         }else{
-            Query actualizar = em.createQuery("Update Renta e set e.estado = '1' WHERE e.estado = '0' and e.cedulaUsuario = "+documentoUsuario+" and e.idPropiedad = "+idPropiedad);
+            Query actualizar = em.createQuery("Update Renta e set e.estado = '1' WHERE e.cedulaUsuario = "+documentoUsuario+" and e.estado = '0' and e.idPropiedad = "+idPropiedad);
             actualizar.executeUpdate();
              System.out.println("contrato actualizado correctamente");
-            return ("contrato actualizado correctamente");
+            return ("Contrato de la propiedad "+idPropiedad+" actualizado correctamente´para el usuario "+idPropiedad);
         }
     }
 }

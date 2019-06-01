@@ -5,7 +5,6 @@
  */
 package integracion;
 
-
 import entities.RentaSuper;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,7 +17,7 @@ import org.apache.http.util.EntityUtils;
 
 /**
  *
- * @author imroo
+ * @author GrupoZero
  */
 public class ProxyRentas {
     public List<RentaSuper> cosultarRentas() throws IOException

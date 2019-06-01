@@ -29,7 +29,7 @@ public class ProxyFinanciera {
         AprobacionDTO ap = new AprobacionDTO();
         try (CloseableHttpClient httpClient = HttpClientBuilder.create().build()) {
             Gson gson = new Gson();
-            HttpPost request = new HttpPost("http://srvcronos.tk:8081/api/Transacciones");
+            HttpPost request = new HttpPost("http://10.192.12.46:8081/api/Transacciones");
             StringEntity postingString = new StringEntity(gson.toJson(t));
             request.setEntity(postingString);
             request.setHeader("Content-type","application/json");

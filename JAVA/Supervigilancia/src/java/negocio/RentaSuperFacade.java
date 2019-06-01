@@ -5,8 +5,8 @@
  */
 package negocio;
 
-
 import entities.RentaSuper;
+import integracion.IntegracionBD;
 import integracion.ProxyRentas;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,12 +17,11 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author imroo
+ * @author GrupoZero
  */
 @Stateless
 public class RentaSuperFacade extends AbstractFacade<RentaSuper> {
-
-    @PersistenceContext(unitName = "SuperVigilanciaPU")
+    @PersistenceContext(unitName = "SuperintendeciaDeVigilanciaPU")
     private EntityManager em;
 
     @Override
@@ -34,6 +33,7 @@ public class RentaSuperFacade extends AbstractFacade<RentaSuper> {
         super(RentaSuper.class);
     }
     
+    IntegracionBD ibd = new IntegracionBD();
     ProxyRentas proxy = new ProxyRentas();
     
     public void consultarRentas() throws IOException, Exception
@@ -46,7 +46,9 @@ public class RentaSuperFacade extends AbstractFacade<RentaSuper> {
         for (RentaSuper r: rentas)
         {
             System.out.println(r.getId());
+            //ibd.persistRentas(em, r);
             em.persist(r);
         }
     }
+    
 }

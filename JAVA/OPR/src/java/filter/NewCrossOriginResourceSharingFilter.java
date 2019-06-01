@@ -19,7 +19,7 @@ public class NewCrossOriginResourceSharingFilter implements ContainerResponseFil
 
     @Override
     public void filter(ContainerRequestContext requestContext, ContainerResponseContext response) {
-        response.getHeaders().putSingle("Access-Control-Allow-Origin", "http://localhost:4200");
+        response.getHeaders().putSingle("Access-Control-Allow-Origin", "http://localhost:8081");
         response.getHeaders().putSingle("Access-Control-Allow-Methods", "*");
         response.getHeaders().putSingle("Access-Control-Allow-Headers", "Content-Type");
         response.getHeaders().putSingle("Access-Control-Allow-Credentials", "true");

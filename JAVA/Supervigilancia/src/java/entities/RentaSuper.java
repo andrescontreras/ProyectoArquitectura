@@ -22,28 +22,27 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author imroo
+ * @author GrupoZero
  */
 @Entity
 @Table(name = "RENTA_SUPER")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "RentaSuper.findAll", query = "SELECT r FROM RentaSuper r")
-    , @NamedQuery(name = "RentaSuper.findById", query = "SELECT r FROM RentaSuper r WHERE r.id = :id")
-    , @NamedQuery(name = "RentaSuper.findByCedulaUsuario", query = "SELECT r FROM RentaSuper r WHERE r.cedulaUsuario = :cedulaUsuario")
-    , @NamedQuery(name = "RentaSuper.findByIdPropiedad", query = "SELECT r FROM RentaSuper r WHERE r.idPropiedad = :idPropiedad")
-    , @NamedQuery(name = "RentaSuper.findByEmail", query = "SELECT r FROM RentaSuper r WHERE r.email = :email")
-    , @NamedQuery(name = "RentaSuper.findByPrecioRenta", query = "SELECT r FROM RentaSuper r WHERE r.precioRenta = :precioRenta")
-    , @NamedQuery(name = "RentaSuper.findByFecha", query = "SELECT r FROM RentaSuper r WHERE r.fecha = :fecha")
-    , @NamedQuery(name = "RentaSuper.findByEstado", query = "SELECT r FROM RentaSuper r WHERE r.estado = :estado")
-    , @NamedQuery(name = "RentaSuper.findByFechaRenta", query = "SELECT r FROM RentaSuper r WHERE r.fechaRenta = :fechaRenta")})
+    @NamedQuery(name = "RentaSuper.findAll", query = "SELECT r FROM RentaSuper r"),
+    @NamedQuery(name = "RentaSuper.findById", query = "SELECT r FROM RentaSuper r WHERE r.id = :id"),
+    @NamedQuery(name = "RentaSuper.findByCedulaUsuario", query = "SELECT r FROM RentaSuper r WHERE r.cedulaUsuario = :cedulaUsuario"),
+    @NamedQuery(name = "RentaSuper.findByIdPropiedad", query = "SELECT r FROM RentaSuper r WHERE r.idPropiedad = :idPropiedad"),
+    @NamedQuery(name = "RentaSuper.findByEmail", query = "SELECT r FROM RentaSuper r WHERE r.email = :email"),
+    @NamedQuery(name = "RentaSuper.findByPrecioRenta", query = "SELECT r FROM RentaSuper r WHERE r.precioRenta = :precioRenta"),
+    @NamedQuery(name = "RentaSuper.findByFecha", query = "SELECT r FROM RentaSuper r WHERE r.fecha = :fecha"),
+    @NamedQuery(name = "RentaSuper.findByEstado", query = "SELECT r FROM RentaSuper r WHERE r.estado = :estado"),
+    @NamedQuery(name = "RentaSuper.findByFechaRenta", query = "SELECT r FROM RentaSuper r WHERE r.fechaRenta = :fechaRenta")})
 public class RentaSuper implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "ID",  insertable = false)
+    @Column(name = "ID", insertable = false)
     private Short id;
     @Basic(optional = false)
     @NotNull

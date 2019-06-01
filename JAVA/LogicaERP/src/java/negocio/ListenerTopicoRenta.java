@@ -25,7 +25,9 @@ import javax.jms.TextMessage;
 @MessageDriven(mappedName = "jms/Topic", activationConfig = {
     @ActivationConfigProperty(propertyName = "connectionFactoryJndiName", propertyValue = "jms/ConnectionFactory"),
     @ActivationConfigProperty(propertyName = "destinationName", propertyValue = "jms/Topic"),
-    @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Topic"),})
+    @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Topic"),
+    @ActivationConfigProperty(propertyName = "addressList", propertyValue = "10.192.12.30"),
+})
 public class ListenerTopicoRenta implements MessageListener {
 
     @EJB
