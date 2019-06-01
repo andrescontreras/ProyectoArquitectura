@@ -11,9 +11,14 @@ import Integracion.IntegradorCorreo;
 import entities.Propiedad;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.concurrent.Future;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.Resource;
+import javax.ejb.AsyncResult;
+import javax.ejb.Asynchronous;
 import javax.ejb.EJB;
+import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.jms.JMSException;
 import javax.naming.NamingException;
@@ -38,6 +43,9 @@ public class PropiedadFacade extends AbstractFacade<Propiedad>{
     public PropiedadFacade() {
         super(Propiedad.class);
     }
+    
+    @Resource
+    SessionContext ctx ;
     
     IntegracionBD bd  = new IntegracionBD();
     
@@ -73,4 +81,14 @@ public class PropiedadFacade extends AbstractFacade<Propiedad>{
         return bd.getPropiedadesxCedula(em,cedula);
     }
     
+    @Asynchronous
+    public Future<List<Propiedad>> getPropiedadesxCliente(BigDecimal cedula){
+        
+        if ( ctx.wasCancelCalled() ) {
+            return new AsyncResult<>(null);
+        }
+        System.out.println("preconsula");
+        List<Propiedad> p = bd.getPropiedadesxCedula(em,cedula);
+        return new AsyncResult<>(p);
+    }
 }
