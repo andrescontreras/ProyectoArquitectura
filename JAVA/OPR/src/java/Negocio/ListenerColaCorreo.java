@@ -24,13 +24,14 @@ import javax.jms.TextMessage;
 @MessageDriven(mappedName = "jms/Queue", activationConfig = {
     @ActivationConfigProperty(propertyName = "connectionFactoryJndiName", propertyValue = "jms/ConnectionFactory"),
     @ActivationConfigProperty(propertyName = "destinationName", propertyValue = "jms/Queue"),
-    @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue"),})
+    @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue"),
+    @ActivationConfigProperty(propertyName = "addressList", propertyValue = "10.192.12.30"),
+})
 public class ListenerColaCorreo implements MessageListener {
 
     @EJB
     IntegradorCorreo correo; 
     public ListenerColaCorreo() {
-      
     }
     @Override
     public void onMessage(Message message) {
@@ -52,8 +53,6 @@ public class ListenerColaCorreo implements MessageListener {
             }
 
         }
-        
-        
     }
     
 }

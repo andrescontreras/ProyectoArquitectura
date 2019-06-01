@@ -35,7 +35,7 @@ public class TimerRevisarContratos {
     RentaFacade r = new RentaFacade();
     @PostConstruct
     private void init() {
-        timerService.createTimer(10000, 2000000000, "IntervalTimerDemo_Info");
+        timerService.createTimer(10000, 20000, "IntervalTimerDemo_Info");
     }
  
     @Timeout
