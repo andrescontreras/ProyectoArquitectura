@@ -130,6 +130,8 @@
     <Compile Include="Negocio\FacadeTransacciones.cs" />
     <Compile Include="Negocio\FacadeUsuarios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SideCar\AprobacionDTO.cs" />
+    <Compile Include="SideCar\TransaccionDTO.cs" />
     <Compile Include="Usuario.cs">
       <DependentUpon>FinancieraEntities.tt</DependentUpon>
     </Compile>
