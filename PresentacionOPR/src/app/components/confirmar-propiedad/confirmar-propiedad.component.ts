@@ -28,8 +28,10 @@ export class ConfirmarPropiedadComponent implements OnInit {
   confirmarRenta() {
    this.service.confirmarRenta(this.confirmacion).subscribe((response) => {
     this.alert = true;
-    this.messageCom  = response;
-     console.log(response);
+    this.messageCom  = response.mensaje;
+     console.log(response.mensaje);
    });
   }
+
+  
 }

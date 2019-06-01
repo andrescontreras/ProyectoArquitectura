@@ -39,7 +39,7 @@ export class RentarPropiedadComponent implements OnInit {
         case 2:
           this.alertCorrecto = true;
           this.alertError = false;
-          this.messageCom = "Pago realizado exitosamente\ Numero aprobación: " + response.fechaAprobacion + "\  " + "Fecha de aprobación" + response.fechaAprobacion;
+          this.messageCom = "Pago realizado exitosamente\ Numero aprobación: " + response.numAprobacion + "\  " + "Fecha de aprobación" + response.fechaAprobacion;
           ;
           break;
         case 1:

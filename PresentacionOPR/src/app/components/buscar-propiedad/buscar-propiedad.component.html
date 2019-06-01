@@ -37,7 +37,7 @@
             <tr>
               <th scope="col">#</th>
               <th scope="col">Nombre</th>
-              <th scope="col">Tipo</th>
+              <th scope="col"># Documento</th>
               <th scope="col">Direccion</th>
               <th scope="col">Precio</th>
               <th scope="col">Propietario</th>
@@ -56,7 +56,7 @@
                 {{ item.nombre }}
               </td>
               <td [routerLink]="['/detalle', item.id]">
-                {{ item.tipoCedula }}
+                {{ item.cedulaOwner }}
               </td>
               <td [routerLink]="['/detalle', item.id]">
                 {{ item.direccion }}

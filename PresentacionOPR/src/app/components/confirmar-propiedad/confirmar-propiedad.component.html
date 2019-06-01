@@ -10,11 +10,11 @@
     <div class="form-group row">
       <label for="Apellidos" class="col-auto col-sm-3 col-form-label text-right">Numero documento</label>
       <div class="col-11 col-sm-8 col-lg-7">
-        <input class="form-control" type="text" placeholder="Cedula Propietario" [(ngModel)]="confirmacion.numDocumento"
+        <input class="form-control" type="number" placeholder="Cedula Propietario" [(ngModel)]="confirmacion.documentoUsuario"
           name="numeroDocumento">
       </div>
     </div>
-  <div *ngIf="alert" class="alert alert-danger alert-dismissible fade show" role="alert">
+  <div *ngIf="alert" data-toggle="alert" class="alert alert-danger alert-dismissible fade show" role="alert">
     {{messageCom}}
      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
        <span aria-hidden="true">&times;</span>

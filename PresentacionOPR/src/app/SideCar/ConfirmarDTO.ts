@@ -1,4 +1,4 @@
 export class ConfirmarDTO {
     idPropiedad: number;
-    numDocumento: string;
+    documentoUsuario: number;
 }
