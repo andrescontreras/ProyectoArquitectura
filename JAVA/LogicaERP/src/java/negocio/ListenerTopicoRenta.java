@@ -60,7 +60,7 @@ public class ListenerTopicoRenta implements MessageListener {
            //     f.persist(r);
                 erpF.crearRentaERP(r); 
                 
-                System.out.println("esta en null");
+                System.out.println("Escucho mensaje de topico");
             } else {
                 //   System.err.println("El mensaje no es de tipo texto");
             }

@@ -92,6 +92,6 @@ public class RentaFacade extends AbstractFacade<Renta> {
     }
 
     public String confirmarContrato(int idPropiedad, int documentoUsuario) {
-        return bd.confirmarContrato(idPropiedad, documentoUsuario, em);
+        return "{ \"mensaje\": \"" + bd.confirmarContrato(idPropiedad, documentoUsuario, em) + "\"}";
     }
 }

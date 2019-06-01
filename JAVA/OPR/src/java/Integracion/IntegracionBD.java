@@ -63,7 +63,7 @@ public class IntegracionBD {
 
     public void revisarContratos(EntityManager em) {
         //Query query = em.createQuery("Select e from Propiedad e");
-        System.out.println("holaaaa");
+        System.out.println("Revision contratos actualizado");
         /*Query select = em.createQuery("Select e from Renta e WHERE e.estado = '0'");
         List <Renta> rentas = (List<Renta>)select.getResultList();
         for (Renta r : rentas){

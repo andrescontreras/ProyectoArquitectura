@@ -91,4 +91,8 @@ public class PropiedadFacade extends AbstractFacade<Propiedad>{
         List<Propiedad> p = bd.getPropiedadesxCedula(em,cedula);
         return new AsyncResult<>(p);
     }
+
+    public void deletePropiedad(Short id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
