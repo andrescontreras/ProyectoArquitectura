@@ -26,7 +26,7 @@ public class TimerAsincrono {
     @EJB
     PropiedadFacade f;
     
-    @Schedule(dayOfWeek = "Mon-Fri", month = "*", hour = "9-19", dayOfMonth = "*", year = "*", minute = "*", second = "0", persistent = false)
+    @Schedule(dayOfWeek = "Mon-Sat", month = "*", hour = "0-23", dayOfMonth = "*", year = "*", minute = "*", second = "35", persistent = false)
     
     public void myTimer() throws InterruptedException, ExecutionException {
         System.out.println("Timer event: " + new Date());
@@ -36,12 +36,17 @@ public class TimerAsincrono {
     @Asynchronous
     public void getRentasCliente() throws InterruptedException, ExecutionException
     {
-        
-        Future<List<Propiedad>> p =  f.getPropiedadesxCliente(new BigDecimal(1018));
+        System.out.println("Soy asincrono");
+        Future<List<Propiedad>> p =  f.getPropiedadesxCliente(new BigDecimal(900));
         List<Propiedad> res = p.get();
         System.out.println(res.size());
+        System.out.println("===========================");
+        System.out.println("===========================");
         for (Propiedad actual: res)
             System.out.println(actual.toString());
+            
+        System.out.println("===========================");
+        System.out.println("===========================");
     }
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
